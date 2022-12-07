@@ -1,0 +1,19 @@
+{
+    "bankAccount": "חשבון בנק",
+    "cash": "מזומן",
+    "application": "אפליקצית תשלומים",
+    "income": "הכנסה",
+    "outcome": "הוצאה",
+    "AddMovementFormScreenTitle": "הזנת תנועה חדשה",
+    "AddMovementFormPlaceHolderPrice": "מחיר",
+    "AddMovementFormPlaceHolderNotes": "הערות",
+    "AddMovementFormTitleSource": ":מקור תנועה",
+    "AddMovementFormTitleType": ":סוג תנועה",
+    "AddMovementFormTitleDate": ":תאריך",
+    "AddMovementFormSubmitButton": "שמור תנועה",
+    "columnTitleNotes": "הערות",
+    "columnTitlePrice": "מחיר",
+    "columnTitleDate": "תאריך",
+    "columnTitleType": "סוג תנועה",
+    "columnTitleSource": "מקור תנועה"
+}

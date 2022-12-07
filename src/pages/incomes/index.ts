@@ -1,0 +1,1 @@
+export { IncomesPageContainer as default } from './container/IncomesPageContainer'
