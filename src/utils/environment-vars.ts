@@ -5,4 +5,6 @@ const {
     REACT_APP_PROD_ACCESS_URI
 } = process.env;
 
-export const server = NODE_ENV === "PRODUCTION" ? REACT_APP_PROD_ACCESS_URI : REACT_APP_DEV_ACCESS_URI;
+console.log(NODE_ENV)
+
+export const server = NODE_ENV === "Production" ? REACT_APP_PROD_ACCESS_URI : REACT_APP_DEV_ACCESS_URI;
