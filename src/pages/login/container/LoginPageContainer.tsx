@@ -23,6 +23,7 @@ export function LoginPageContainer() {
         REACT_APP_DEV_GLOBAL_URI,
         REACT_APP_URI_AUTH
     } = process.env;
+
     const { mutate, isLoading, isError, error } = useMutation((data: UserLoginModel) => Post(`${REACT_APP_DEV_GLOBAL_URI}/${REACT_APP_URI_AUTH}/login`, data)
         , {
             onSuccess({ data }) {
