@@ -13,7 +13,7 @@ export function AddRecordContainer(): JSX.Element {
     REACT_APP_URI_MOVEMENTS
   } = process.env;
 
-  const { mutateAsync } = useMutation((data: MovementResponseModel) => Post(`${server}${REACT_APP_URI_MOVEMENTS}addMovement`, data));
+  const { mutateAsync } = useMutation((data: MovementResponseModel) => Post(`${server}/${REACT_APP_URI_MOVEMENTS}/addMovement`, data));
 
   async function onSubmit(data: MovementResponseModel) {
     try {
