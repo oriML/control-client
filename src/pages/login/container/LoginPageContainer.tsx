@@ -20,11 +20,13 @@ export function LoginPageContainer() {
     const { SetItem } = useLocalStorage();
     const history = useHistory();
     const {
+        NODE_ENV,
         REACT_APP_DEV_GLOBAL_URI,
+        REACT_APP_PROD_GLOBAL_URI,
         REACT_APP_URI_AUTH
     } = process.env;
 
-    const { mutate, isLoading, isError, error } = useMutation((data: UserLoginModel) => Post(`${REACT_APP_DEV_GLOBAL_URI}/${REACT_APP_URI_AUTH}/login`, data)
+    const { mutate, isLoading, isError, error } = useMutation((data: UserLoginModel) => Post(`${NODE_ENV === 'production' ? REACT_APP_PROD_GLOBAL_URI : REACT_APP_DEV_GLOBAL_URI}/${REACT_APP_URI_AUTH}/login`, data)
         , {
             onSuccess({ data }) {
                 SetItem('jwt', data.token);
