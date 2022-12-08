@@ -38,7 +38,6 @@ export function LoginPageContainer() {
             },
         });
 
-
     function onSubmit(model: UserLoginModel): void {
         mutate(model);
     }
