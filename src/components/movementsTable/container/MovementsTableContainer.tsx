@@ -67,12 +67,12 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
     };
 
     const getMovementsByCriteria = async () => {
-        return Post(`${server}${REACT_APP_URI_MOVEMENTS}getAllMovements`, criteria);
+        return Post(`${server}/${REACT_APP_URI_MOVEMENTS}/getAllMovements`, criteria);
     };
 
     const updateMovement = async (movement: MovementResponseModel) => {
         try {
-            await Post(`${server}${REACT_APP_URI_MOVEMENTS}update/${movement?._id}`
+            await Post(`${server}/${REACT_APP_URI_MOVEMENTS}/update/${movement?._id}`
                 , movement
             );
             setSelectedMovement(undefined);
@@ -85,7 +85,7 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
 
     const deleteMovement = async () => {
         try {
-            await Delete(`${server}${REACT_APP_URI_MOVEMENTS}delete/${selectedMovement?._id}`);
+            await Delete(`${server}/${REACT_APP_URI_MOVEMENTS}/delete/${selectedMovement?._id}`);
             setSelectedMovement(undefined);
             setToggleDeleteModal(false);
             refetch();
