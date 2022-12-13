@@ -4,11 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 interface IMenuRowProps {
     icon: () => JSX.Element,
     title: string,
-    path: string
+    path: string,
+    closeMenu: () => void
 }
 
 
-function MenuRow({ icon, title, path }: IMenuRowProps) {
+function MenuRow({ icon, title, path, closeMenu }: IMenuRowProps) {
     const { pathname } = useLocation();
     const isSelected = pathname == path;
 
@@ -21,7 +22,7 @@ function MenuRow({ icon, title, path }: IMenuRowProps) {
 
     const titleStyle = `p-2.5 px-4 text-[15px] text-gray-300 text-right w-full font-bold ${isSelected ? `text-green-800` : `hover:text-green-800`}`;
     return (
-        <Link to={path}>
+        <Link to={path} onClick={closeMenu}>
             <div
                 className={rowStyle}
             >

@@ -22,7 +22,7 @@ function MenuList({ toggleMenu, menuHidden }: IMenuHeaderProps) {
                 <MenuHeader toggleMenu={toggleMenu} />
                 <HrLine />
                 {
-                    menuRows.map(({ icon, title, path }) => <MenuRow key={title + path} icon={icon} title={title} path={path} />)
+                    menuRows.map(({ icon, title, path }) => <MenuRow key={title + path} closeMenu={toggleMenu} icon={icon} title={title} path={path} />)
                 }
             </div>
         </div >
