@@ -15,5 +15,7 @@
     "columnTitlePrice": "מחיר",
     "columnTitleDate": "תאריך",
     "columnTitleType": "סוג תנועה",
-    "columnTitleSource": "מקור תנועה"
+    "columnTitleSource": "מקור תנועה",
+    "USER_REGISTER_TITLE": "הרשמה",
+    "NAME_PLACEHOLDER": "שם משתמש"
 }

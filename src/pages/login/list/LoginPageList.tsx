@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios'
 import React, { FormEventHandler, ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
 import { UseMutationResult } from 'react-query'
+import { Link } from 'react-router-dom'
 import ErrorMessage from '../../../components/errorMessage/ErrorMessage'
 import Loader from '../../../components/loader/Loader'
 import { UserLoginModel } from '../../../models/user/UserLoginModel'
@@ -76,7 +77,7 @@ function LoginPageList({ onSubmit, children }: ILoginPageListProps) {
                     </button>
                     <div className="flex flex-col gap-2 mt-2">
                         <a className="text-gray-500" href="#!">שכחת סיסמא?</a>
-                        <a className="text-gray-500" href="#!">צור משתמש חדש</a>
+                        <Link className="text-gray-500" to='/register'>צור משתמש חדש</Link>
                     </div>
                 </div>
             </form>
