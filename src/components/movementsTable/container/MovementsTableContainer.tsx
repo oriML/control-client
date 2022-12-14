@@ -11,6 +11,7 @@ import SubmitModal from '../../submitModal/SubmitModal'
 import MovementsTableList from '../list/MovementsTableList'
 
 import { server } from '../../../utils/environment-vars'
+import { useTranslation } from 'react-i18next'
 
 interface IMovementsTableContainerProps {
     criteria: MovementCriteria
@@ -28,6 +29,8 @@ const ColumnHeader = ({ children }: { children?: ReactNode }) => (
 )
 
 export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria }: IMovementsTableContainerProps) {
+
+    const { t } = useTranslation();
 
     const { REACT_APP_URI_MOVEMENTS } = process.env;
 
@@ -134,8 +137,8 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
                                     {/* 
                                     LAODER!!!!!!!!!!!!!!!!!!!!!!!
                                 */}
-                                    <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
-                                        <div className="inline-flex mt-2 xs:mt-0">
+                                    <div className="px-5 py-5 bg-white border-t flex flex-row-reverse xs:flex-row items-center justify-center xs:justify-between">
+                                        <div className="mt-2 inline-flex xs:mt-0" style={{ marginRight: "50%" }}>
                                             <button
                                                 className="text-sm text-indigo-50 transition duration-150 hover:bg-green-400 bg-green-600 font-semibold py-2 px-4 rounded-l"
                                                 onClick={getPrevMonthResults}
@@ -149,6 +152,14 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
                                             >
                                                 חודש הבא
                                             </button>
+                                        </div>
+                                        <div className="mt-2 mr-auto text-sm text-indigo-50 transition duration-150  bg-green-600 font-semibold py-2 px-4 rounded">
+                                            {
+                                                data?.data?.info?.sum > 0 ?
+                                                    <span>{t("SUM_TITLE", { sum: data?.data?.info?.sum })}</span>
+                                                    :
+                                                    t("NO_SUM")
+                                            }
                                         </div>
                                     </div>
                                 </section>

@@ -17,5 +17,7 @@
     "columnTitleType": "סוג תנועה",
     "columnTitleSource": "מקור תנועה",
     "USER_REGISTER_TITLE": "הרשמה",
-    "NAME_PLACEHOLDER": "שם משתמש"
+    "NAME_PLACEHOLDER": "שם משתמש",
+    "SUM_TITLE": "סך הכל: ₪{{sum}}",
+    "NO_SUM": "0"
 }
