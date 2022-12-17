@@ -8,10 +8,10 @@ const HrLine = () => <div className="my-4 bg-gray-200 h-[1px]"></div>
 
 
 function MenuList({ toggleMenu, menuHidden }: IMenuHeaderProps) {
-    const listStyle = `sidebar border-l-2 border-l-solid border-l-gray-100 rounded-tl-md fixed top-0 bottom-0 lg:right-0  p-2 w-[300px] overflow-y-auto text-center bg-green-600` + menuHidden;
+    const listStyle = `z-[1000] sidebar border-l-2 border-l-solid border-l-gray-100 rounded-tl-md fixed top-0 bottom-0 lg:right-0  p-2 w-[300px] overflow-y-auto text-center bg-green-600` + menuHidden;
 
     return (
-        <div>
+        <>
             {/* <span
                 className="absolute text-white text-4xl top-5 left-4 cursor-pointer"
             // onClick="openSidebar()"
@@ -25,7 +25,7 @@ function MenuList({ toggleMenu, menuHidden }: IMenuHeaderProps) {
                     menuRows.map(({ icon, title, path }) => <MenuRow key={title + path} closeMenu={toggleMenu} icon={icon} title={title} path={path} />)
                 }
             </div>
-        </div >
+        </ >
     )
 }
 
