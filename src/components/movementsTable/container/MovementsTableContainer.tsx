@@ -124,14 +124,7 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
                                         <ColumnHeader />
 
                                     </div>
-                                    <div className="min-h-[440px] max-h-[540px] bg-gray-100 overflow-auto">
-                                        <MovementsTableList
-                                            tableList={data?.data?.movements}
-                                            setToggleDeleteModal={setToggleDeleteModal}
-                                            setToggleEditModal={setToggleEditModal}
-                                            setSelectedMovement={setSelectedMovement}
-
-                                        />
+                                    <div className="min-h-[540px] max-h-[540px] bg-gray-100 overflow-auto">
                                         <MovementsTableList
                                             tableList={data?.data?.movements}
                                             setToggleDeleteModal={setToggleDeleteModal}
@@ -150,14 +143,14 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
                                                 className="text-sm text-indigo-50 transition duration-150 hover:bg-green-400 bg-green-600 font-semibold py-2 px-4 rounded-l"
                                                 onClick={getPrevMonthResults}
                                             >
-                                                חודש קודם
+                                                {t('PREV_MONTH')}
                                             </button>
                                             &nbsp; &nbsp;
                                             <button
                                                 className="text-sm text-indigo-50 transition duration-150 hover:bg-green-400 bg-green-600 font-semibold py-2 px-4 rounded-r"
                                                 onClick={getNextMonthResults}
                                             >
-                                                חודש הבא
+                                                {t('NEXT_MONTH')}
                                             </button>
                                         </div>
                                         <div className="mt-2 mr-auto text-sm text-indigo-50 transition duration-150  bg-green-600 font-semibold py-2 px-4 rounded absolute left-[1%]">

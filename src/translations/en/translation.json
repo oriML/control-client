@@ -19,5 +19,7 @@
     "USER_REGISTER_TITLE": "הרשמה",
     "NAME_PLACEHOLDER": "שם משתמש",
     "SUM_TITLE": "סך הכל: ₪{{sum}}",
-    "NO_SUM": "0"
+    "NO_SUM": "0",
+    "PREV_MONTH": "חודש קודם",
+    "NEXT_MONTH": "חודש הבא"
 }
