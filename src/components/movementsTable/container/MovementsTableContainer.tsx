@@ -124,7 +124,14 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
                                         <ColumnHeader />
 
                                     </div>
-                                    <div className="min-h-[440px] bg-gray-100 overflow-auto">
+                                    <div className="min-h-[440px] max-h-[540px] bg-gray-100 overflow-auto">
+                                        <MovementsTableList
+                                            tableList={data?.data?.movements}
+                                            setToggleDeleteModal={setToggleDeleteModal}
+                                            setToggleEditModal={setToggleEditModal}
+                                            setSelectedMovement={setSelectedMovement}
+
+                                        />
                                         <MovementsTableList
                                             tableList={data?.data?.movements}
                                             setToggleDeleteModal={setToggleDeleteModal}
