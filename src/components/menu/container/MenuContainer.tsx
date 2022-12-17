@@ -13,7 +13,7 @@ export function MenuContainer() {
     return (
         <>
             <div
-                className={`flex justify-center items-center my-auto w-4
+                className={`flex z-[1000] justify-center items-center my-auto w-4
                 cursor-pointer bg-green-600 h-full text-white 
                 fixed top-0 right-0
                 hover:border-green-800 hover:rounded-tl-full 
