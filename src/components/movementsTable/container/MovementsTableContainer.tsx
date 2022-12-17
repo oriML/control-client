@@ -144,8 +144,8 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
                                     {/* 
                                     LAODER!!!!!!!!!!!!!!!!!!!!!!!
                                 */}
-                                    <div className="px-5 py-5 bg-white border-t flex flex-row-reverse xs:flex-row items-center justify-center xs:justify-between">
-                                        <div className="mt-2 inline-flex xs:mt-0" style={{ marginRight: "50%" }}>
+                                    <div className="px-5 py-5 bg-white border-t flex flex-row-reverse xs:flex-row items-center justify-center xs:justify-between relative">
+                                        <div className="mt-2 inline-flex xs:mt-0">
                                             <button
                                                 className="text-sm text-indigo-50 transition duration-150 hover:bg-green-400 bg-green-600 font-semibold py-2 px-4 rounded-l"
                                                 onClick={getPrevMonthResults}
@@ -160,7 +160,7 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
                                                 חודש הבא
                                             </button>
                                         </div>
-                                        <div className="mt-2 mr-auto text-sm text-indigo-50 transition duration-150  bg-green-600 font-semibold py-2 px-4 rounded">
+                                        <div className="mt-2 mr-auto text-sm text-indigo-50 transition duration-150  bg-green-600 font-semibold py-2 px-4 rounded absolute left-[1%]">
                                             {
                                                 data?.data?.info?.sum > 0 ?
                                                     <span>{t("SUM_TITLE", { sum: data?.data?.info?.sum })}</span>
