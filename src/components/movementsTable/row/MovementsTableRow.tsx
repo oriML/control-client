@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { DeleteMovementIcon, EditMovementIcon } from '../../../icons'
 import { MovementResponseModel } from '../../../models/movements/movementResponse.model'
 import { MovementSourceType } from '../../../types/movementSource.type'
@@ -45,6 +46,8 @@ function MovementsTableRow({
     setSelectedMovement
 }: IMovementsTableRowProps) {
 
+    const { t } = useTranslation();
+
     const SetSelectedMovement = (clicked: string) => {
         setSelectedMovement(tableRowData);
         if (clicked === 'edit') {
@@ -73,7 +76,7 @@ function MovementsTableRow({
             </OddRowWrapper>
             <EvenRowWrapper>
                 <span>
-                    {MovementSourceType[`${tableRowData.source}`]}
+                    {t(MovementSourceType[`${tableRowData.source}`])}
                 </span>
             </EvenRowWrapper>
             <OddRowWrapper>
