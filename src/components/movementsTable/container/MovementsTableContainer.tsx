@@ -50,7 +50,8 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
 
             const newCriteria: MovementCriteria = {
                 ...criteria,
-                month: criteria.month + (criteria.month === 12 ? 0 : 1)
+                year: (criteria.month === 12 ? criteria.year + 1 : criteria.year),
+                month: (criteria.month === 12 ? 1 : criteria.month + 1)
             } as MovementCriteria;
 
             setRequestCriteria(newCriteria);
@@ -62,7 +63,8 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
 
             const newCriteria: MovementCriteria = {
                 ...criteria,
-                month: criteria.month - (criteria.month === 1 ? 0 : 1)
+                year: (criteria.month === 1 ? criteria.year - 1 : criteria.year),
+                month: (criteria.month === 1 ? 12 : criteria.month - 1)
             } as MovementCriteria;
 
             setRequestCriteria(newCriteria);
