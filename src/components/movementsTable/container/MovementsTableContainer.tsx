@@ -157,10 +157,9 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
                                         </div>
                                         <div className="mt-2 mr-auto text-sm text-indigo-50 transition duration-150  bg-green-600 font-semibold py-2 px-4 rounded absolute left-[1%]">
                                             {
-                                                data?.data?.info?.sum > 0 ?
-                                                    <span>{t("SUM_TITLE", { sum: data?.data?.info?.sum })}</span>
-                                                    :
-                                                    t("NO_SUM")
+                                                <span>
+                                                    {t("SUM_TITLE", { sum: data?.data?.info?.sum ?? 0 })}
+                                                </span>
                                             }
                                         </div>
                                     </div>
