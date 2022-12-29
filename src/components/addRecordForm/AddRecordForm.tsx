@@ -9,6 +9,7 @@ import Modal from '../modal/Modal';
 import { MovementResponseModel } from '../../models/movements/movementResponse.model';
 
 import { useTranslation } from 'react-i18next'
+import Autocomplete from '../autocomplete/Autocomplete';
 
 const initialColorsStates = -1;
 
@@ -24,13 +25,13 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
     useEffect(() => {
         if (movement) {
             reset({
-                _id: movement._id,
-                category: movement.category,
-                price: movement.price,
-                notes: movement.notes,
-                type: movement.type,
-                source: movement.source,
-                movementDate: movement.movementDate
+                _id: movement?._id,
+                category: movement?.category,
+                price: movement?.price,
+                notes: movement?.notes,
+                type: movement?.type,
+                source: movement?.source,
+                movementDate: movement?.movementDate
             });
         }
     }, [])
@@ -43,6 +44,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     const [selectedTypeColor, setSelectedTypeColor] = React.useState<number>(initialColorsStates);
 
+    const [selectedCategory, setSelectedCategory] = React.useState<string>('');
 
     function onSubmitForm(data: MovementResponseModel): void {
         onSubmit(data);
@@ -73,6 +75,24 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
                         type="number"
                     // defaultValue={movement?.price}
                     />
+                </div>
+
+                <div>
+                    <Autocomplete
+                        options={["test1", "test2", "test3"]}
+                        value={selectedCategory}
+                        onChange={setSelectedCategory}
+                    />
+                    {/* <input
+                        {...register("notes", { required: true })}
+                        className={`pt-3 text-right placeholder:text-right pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200 
+                        ${errors?.notes ? "border-red-500" : null}
+                        `}
+                        style={{ direction: "rtl" }}
+                        type="text"
+                        placeholder={`${t('AddMovementFormPlaceHolderCategories')}`}
+                    // defaultValue={movement?.notes}
+                    /> */}
                 </div>
 
                 <div className="relative z-0 w-full mb-5">
