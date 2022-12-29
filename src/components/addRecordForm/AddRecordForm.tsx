@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useQuery } from 'react-query'
 import { AddRecordFormInputs } from '../../models/form/form.types';
-import { MovementModel } from '../../models/movements/movement.model';
+import { AddMovementFormModel, MovementModel } from '../../models/movements/movement.model';
 import { MovementSourceType, MovementType } from '../../types/movementSource.type';
 import { ChildrenProps } from '../../pages/addRecordDialog/types';
 import AlertModal from '../alertModal/AlertModal';
@@ -10,6 +11,8 @@ import { MovementResponseModel } from '../../models/movements/movementResponse.m
 
 import { useTranslation } from 'react-i18next'
 import Autocomplete from '../autocomplete/Autocomplete';
+import { useAxiosDAL } from '../../hooks/useAxiosDAL';
+import { server } from '../../utils/environment-vars'
 
 const initialColorsStates = -1;
 
@@ -21,12 +24,16 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     const { t } = useTranslation();
 
-    const { register, handleSubmit, watch, getValues, reset, formState: { errors } } = useForm<MovementResponseModel>();
+    const { REACT_APP_URI_CATEGORIES } = process.env;
+
+    const { Get } = useAxiosDAL();
+
+    const { register, handleSubmit, watch, getValues, reset, formState: { errors } } = useForm<AddMovementFormModel>();
     useEffect(() => {
         if (movement) {
             reset({
                 _id: movement?._id,
-                category: movement?.category,
+                category: movement?.category?.name,
                 price: movement?.price,
                 notes: movement?.notes,
                 type: movement?.type,
@@ -36,7 +43,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
         }
     }, [])
 
-    // React.useEffect(() => console.log(watch("type")));
+    React.useEffect(() => console.log(watch("category")));
 
     // const [toggleModal, setToggleModal] = React.useState<boolean>(false);
 
@@ -44,15 +51,30 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     const [selectedTypeColor, setSelectedTypeColor] = React.useState<number>(initialColorsStates);
 
-    const [selectedCategory, setSelectedCategory] = React.useState<string>('');
+    const [acSearchInput, setAcSearchInput] = React.useState<string>('');
 
-    function onSubmitForm(data: MovementResponseModel): void {
+    // const [autocompleteOptions, setAutocompleteOptions] = React.useState<string[]>(["test1", "test2", "test3"]);
+
+    function onSubmitForm(data: AddMovementFormModel): void {
         onSubmit(data);
         reset();
         setSelectedTypeColor(initialColorsStates);
         setSelectedTypeColor(initialColorsStates);
     };
 
+    function onAutocompleteSelect(name: string) {
+
+        setAcSearchInput(name);
+    }
+
+    const getCategotiesByTerm = async () => {
+        return Get(`${server}/${REACT_APP_URI_CATEGORIES}/${acSearchInput}`);
+    };
+
+    const { data: options, isError, isSuccess, refetch, isLoading } = useQuery(
+        [`categoriesAC`, acSearchInput],
+        () => getCategotiesByTerm(),
+    )
     return (
         <>
 
@@ -79,21 +101,12 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
                 <div>
                     <Autocomplete
-                        options={["test1", "test2", "test3"]}
-                        value={selectedCategory}
-                        onChange={setSelectedCategory}
+                        options={options?.data || []}
+                        value={acSearchInput}
+                        onChange={onAutocompleteSelect}
+                        inputControl={() => ({ ...register("category", { required: true }) })}
                         placeholder={`${t('AddMovementFormPlaceHolderCategories')}`}
                     />
-                    {/* <input
-                        {...register("notes", { required: true })}
-                        className={`pt-3 text-right placeholder:text-right pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200 
-                        ${errors?.notes ? "border-red-500" : null}
-                        `}
-                        style={{ direction: "rtl" }}
-                        type="text"
-                        placeholder={`${t('AddMovementFormPlaceHolderCategories')}`}
-                    // defaultValue={movement?.notes}
-                    /> */}
                 </div>
 
                 <div className="relative z-0 w-full mb-5">

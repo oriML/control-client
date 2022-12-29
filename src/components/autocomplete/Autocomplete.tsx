@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react"
 
-export default function Autocomplete({ options, value, placeholder, onChange }: any) {
+export default function Autocomplete({ options, value, placeholder, onChange, inputControl }: any) {
 
     const [showOptions, setShowOptions] = useState(false)
     const [cursor, setCursor] = useState(-1)
-    const ref = useRef<HTMLDivElement>(null);
+    const divRef = useRef<HTMLDivElement>(null);
 
-    const select = (option: string) => {
-        onChange(option)
+    const select = (option: any) => {
+        onChange(option.name)
         setShowOptions(false)
     }
 
@@ -19,7 +19,7 @@ export default function Autocomplete({ options, value, placeholder, onChange }: 
         }
     }
 
-    const filteredOptions = options.filter((option: string) => option.includes(value))
+    const filteredOptions = options.filter((option: { id: string, name: string }) => option.name.includes(value))
 
     const moveCursorDown = () => {
         if (cursor < filteredOptions.length - 1) {
@@ -51,7 +51,7 @@ export default function Autocomplete({ options, value, placeholder, onChange }: 
 
     useEffect(() => {
         const listener = (e: any) => {
-            if (!ref?.current?.contains(e.target)) {
+            if (!divRef?.current?.contains(e.target)) {
                 setShowOptions(false)
                 setCursor(-1)
             }
@@ -66,9 +66,10 @@ export default function Autocomplete({ options, value, placeholder, onChange }: 
     }, []);
 
     return (
-        <div className="relative w-full m-auto" ref={ref} >
+        <div className="relative w-full m-auto" ref={divRef} >
 
             <input type="text" className="w-full dir-rtl border-2 px-4 py-2 outline-none rounded-lg"
+                {...inputControl()}
                 value={value}
                 placeholder={placeholder}
                 onChange={e => handleChange(e.target.value)}
@@ -94,9 +95,9 @@ export default function Autocomplete({ options, value, placeholder, onChange }: 
                     }
 
                     return <li className={className}
-                        key={option}
+                        key={option._id}
                         onClick={() => select(option)}
-                    >{option}</li>
+                    >{option.name}</li>
                 }) : <li className="px-4 py-2 text-gray-500">No results</li>}
 
             </ul>
