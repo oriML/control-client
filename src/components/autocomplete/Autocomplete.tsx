@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 
-export default function Autocomplete({ options, value, onChange }: any) {
+export default function Autocomplete({ options, value, placeholder, onChange }: any) {
 
     const [showOptions, setShowOptions] = useState(false)
     const [cursor, setCursor] = useState(-1)
@@ -70,6 +70,7 @@ export default function Autocomplete({ options, value, onChange }: any) {
 
             <input type="text" className="w-full dir-rtl border-2 px-4 py-2 outline-none rounded-lg"
                 value={value}
+                placeholder={placeholder}
                 onChange={e => handleChange(e.target.value)}
                 onFocus={() => setShowOptions(true)}
                 onKeyDown={(e) => handleNav(e)}

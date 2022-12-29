@@ -82,6 +82,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
                         options={["test1", "test2", "test3"]}
                         value={selectedCategory}
                         onChange={setSelectedCategory}
+                        placeholder={`${t('AddMovementFormPlaceHolderCategories')}`}
                     />
                     {/* <input
                         {...register("notes", { required: true })}
