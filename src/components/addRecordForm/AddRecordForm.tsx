@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next'
 import Autocomplete from '../autocomplete/Autocomplete';
 import { useAxiosDAL } from '../../hooks/useAxiosDAL';
 import { server } from '../../utils/environment-vars'
+import { AddCategoryIcon } from '../../icons';
 
 const initialColorsStates = -1;
 
@@ -28,7 +29,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     const { Get } = useAxiosDAL();
 
-    const { register, handleSubmit, watch, getValues, reset, formState: { errors } } = useForm<AddMovementFormModel>();
+    const { register, setValue, handleSubmit, watch, getValues, reset, formState: { errors } } = useForm<AddMovementFormModel>();
     useEffect(() => {
         if (movement) {
             reset({
@@ -62,9 +63,8 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
         setSelectedTypeColor(initialColorsStates);
     };
 
-    function onAutocompleteSelect(name: string) {
-
-        setAcSearchInput(name);
+    function onAutocompleteSelect(option: any) {
+        setValue('category', option);
     }
 
     const getCategotiesByTerm = async () => {
@@ -101,10 +101,20 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
                 <div>
                     <Autocomplete
+                        inputControl={{
+                            ...register("category", {
+                                required: true,
+                                // pattern: {
+                                //     message: 'use only letters',
+                                //     value: /^[a-z\u0590-\u05fe]+$/i
+                                // }
+                            })
+                        }}
                         options={options?.data || []}
                         value={acSearchInput}
-                        onChange={onAutocompleteSelect}
-                        inputControl={() => ({ ...register("category", { required: true }) })}
+                        onChange={setAcSearchInput}
+                        onSelect={onAutocompleteSelect}
+                        addIcon={<AddCategoryIcon size={18} />}
                         placeholder={`${t('AddMovementFormPlaceHolderCategories')}`}
                     />
                 </div>
