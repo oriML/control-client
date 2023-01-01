@@ -44,7 +44,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
         }
     }, [])
 
-    React.useEffect(() => console.log(watch("category")));
+    // React.useEffect(() => console.log(watch("category")));
 
     // const [toggleModal, setToggleModal] = React.useState<boolean>(false);
 
