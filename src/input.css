@@ -28,4 +28,8 @@
     .sidebar>* {
         direction: rtl;
     }
+
+    .dir-rtl {
+        direction: rtl;
+    }
 }

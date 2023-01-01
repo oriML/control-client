@@ -12,6 +12,7 @@ import MovementsTableList from '../list/MovementsTableList'
 
 import { server } from '../../../utils/environment-vars'
 import { useTranslation } from 'react-i18next'
+import { AddMovementFormModel } from '../../../models/movements/movement.model'
 
 interface IMovementsTableContainerProps {
     criteria: MovementCriteria
@@ -75,7 +76,7 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
         return Post(`${server}/${REACT_APP_URI_MOVEMENTS}/getAllMovements`, criteria);
     };
 
-    const updateMovement = async (movement: MovementResponseModel) => {
+    const updateMovement = async (movement: MovementResponseModel | AddMovementFormModel) => {
         try {
             await Post(`${server}/${REACT_APP_URI_MOVEMENTS}/update/${movement?._id}`
                 , movement

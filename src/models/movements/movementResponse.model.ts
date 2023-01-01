@@ -7,5 +7,5 @@ export interface MovementResponseModel {
     notes: string;
     source: number;
     type: number;
-    category: string;
+    category: MovementCategoryModel;
 }

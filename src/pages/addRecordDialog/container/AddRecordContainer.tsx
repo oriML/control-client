@@ -1,7 +1,7 @@
 import React from 'react'
 import { AddRecordList } from '../list/AddRecordList'
 import { useAxiosDAL } from '../../../hooks/useAxiosDAL'
-import { MovementModel } from '../../../models/movements/movement.model'
+import { AddMovementFormModel, MovementModel } from '../../../models/movements/movement.model'
 import { useMutation } from 'react-query'
 import { MovementResponseModel } from '../../../models/movements/movementResponse.model'
 
@@ -13,9 +13,9 @@ export function AddRecordContainer(): JSX.Element {
     REACT_APP_URI_MOVEMENTS
   } = process.env;
 
-  const { mutateAsync } = useMutation((data: MovementResponseModel) => Post(`${server}/${REACT_APP_URI_MOVEMENTS}/addMovement`, data));
+  const { mutateAsync } = useMutation((data: MovementResponseModel | AddMovementFormModel) => Post(`${server}/${REACT_APP_URI_MOVEMENTS}/addMovement`, data));
 
-  async function onSubmit(data: MovementResponseModel) {
+  async function onSubmit(data: MovementResponseModel | AddMovementFormModel) {
     try {
       await mutateAsync(data);
     } catch (err) {

@@ -8,6 +8,11 @@ import { RiFileEditLine } from 'react-icons/ri'
 import { MdOutlineDelete } from 'react-icons/md'
 import { GrCircleAlert } from 'react-icons/gr'
 import { IoMdCloseCircle } from 'react-icons/io'
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
+
+interface ISizeProps {
+    size: number
+}
 
 export const ICON_SIZE_XLARGE = 32;
 
@@ -43,6 +48,8 @@ export const DeleteMovementIcon = () => <MdOutlineDelete size={ICON_SIZE_MEDIUM}
 
 export const CloseIcon = () => <IoMdCloseCircle size={ICON_SIZE_XLARGE} />;
 
-export const AlertIcon = ({ size }: { size: number }) => <GrCircleAlert size={size} />;
+export const AlertIcon = ({ size }: ISizeProps) => <GrCircleAlert size={size} />;
+
+export const AddCategoryIcon = ({ size }: ISizeProps) => <AiOutlineAppstoreAdd size={size} />;
 
 export default {}

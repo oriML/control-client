@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useQuery } from 'react-query'
 import { AddRecordFormInputs } from '../../models/form/form.types';
-import { MovementModel } from '../../models/movements/movement.model';
+import { AddMovementFormModel, MovementModel } from '../../models/movements/movement.model';
 import { MovementSourceType, MovementType } from '../../types/movementSource.type';
 import { ChildrenProps } from '../../pages/addRecordDialog/types';
 import AlertModal from '../alertModal/AlertModal';
@@ -9,6 +10,10 @@ import Modal from '../modal/Modal';
 import { MovementResponseModel } from '../../models/movements/movementResponse.model';
 
 import { useTranslation } from 'react-i18next'
+import Autocomplete from '../autocomplete/Autocomplete';
+import { useAxiosDAL } from '../../hooks/useAxiosDAL';
+import { server } from '../../utils/environment-vars'
+import { AddCategoryIcon } from '../../icons';
 
 const initialColorsStates = -1;
 
@@ -20,22 +25,26 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     const { t } = useTranslation();
 
-    const { register, handleSubmit, watch, getValues, reset, formState: { errors } } = useForm<MovementResponseModel>();
+    const { REACT_APP_URI_CATEGORIES } = process.env;
+
+    const { Get, Post } = useAxiosDAL();
+
+    const { register, setValue, handleSubmit, resetField, watch, getValues, reset, formState: { errors } } = useForm<AddMovementFormModel>();
     useEffect(() => {
         if (movement) {
             reset({
-                _id: movement._id,
-                category: movement.category,
-                price: movement.price,
-                notes: movement.notes,
-                type: movement.type,
-                source: movement.source,
-                movementDate: movement.movementDate
+                _id: movement?._id,
+                category: movement?.category?.name,
+                price: movement?.price,
+                notes: movement?.notes,
+                type: movement?.type,
+                source: movement?.source,
+                movementDate: movement?.movementDate
             });
         }
     }, [])
 
-    // React.useEffect(() => console.log(watch("type")));
+    React.useEffect(() => console.log(watch("category")));
 
     // const [toggleModal, setToggleModal] = React.useState<boolean>(false);
 
@@ -43,14 +52,39 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     const [selectedTypeColor, setSelectedTypeColor] = React.useState<number>(initialColorsStates);
 
+    const [acSearchInput, setAcSearchInput] = React.useState<string>('');
 
-    function onSubmitForm(data: MovementResponseModel): void {
+    // const [autocompleteOptions, setAutocompleteOptions] = React.useState<string[]>(["test1", "test2", "test3"]);
+
+    function onSubmitForm(data: AddMovementFormModel): void {
         onSubmit(data);
         reset();
         setSelectedTypeColor(initialColorsStates);
         setSelectedTypeColor(initialColorsStates);
     };
 
+    function onAutocompleteSelect(option: any) {
+        setValue('category', option);
+    }
+
+    const getCategotiesByTerm = async () => {
+        return Get(`${server}/${REACT_APP_URI_CATEGORIES}/${acSearchInput}`);
+    };
+
+    const addCategory = async () => {
+        const { data } = await Post(`${server}/${REACT_APP_URI_CATEGORIES}/create`, { name: acSearchInput });
+        return data;
+    }
+
+    const removeCategorySelection = (category: string) => {
+        setAcSearchInput('');
+        resetField('category');
+    }
+
+    const { data: options, isError, isSuccess, refetch, isLoading } = useQuery(
+        [`categoriesAC`, acSearchInput],
+        () => getCategotiesByTerm(),
+    )
     return (
         <>
 
@@ -72,6 +106,28 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
                         placeholder={`${t('AddMovementFormPlaceHolderPrice')}`}
                         type="number"
                     // defaultValue={movement?.price}
+                    />
+                </div>
+
+                <div>
+                    <Autocomplete
+                        inputControl={{
+                            ...register("category", {
+                                required: true,
+                                // pattern: {
+                                //     message: 'use only letters',
+                                //     value: /^[a-z\u0590-\u05fe]+$/i
+                                // }
+                            })
+                        }}
+                        options={options?.data || []}
+                        value={acSearchInput}
+                        onChange={setAcSearchInput}
+                        onSelect={onAutocompleteSelect}
+                        onCreate={addCategory}
+                        onRemove={removeCategorySelection}
+                        addIcon={<AddCategoryIcon size={18} />}
+                        placeholder={`${t('AddMovementFormPlaceHolderCategories')}`}
                     />
                 </div>
 
