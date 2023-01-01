@@ -29,7 +29,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     const { Get, Post } = useAxiosDAL();
 
-    const { register, setValue, handleSubmit, watch, getValues, reset, formState: { errors } } = useForm<AddMovementFormModel>();
+    const { register, setValue, handleSubmit, resetField, watch, getValues, reset, formState: { errors } } = useForm<AddMovementFormModel>();
     useEffect(() => {
         if (movement) {
             reset({
@@ -73,8 +73,12 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     const addCategory = async () => {
         const { data } = await Post(`${server}/${REACT_APP_URI_CATEGORIES}/create`, { name: acSearchInput });
-
         return data;
+    }
+
+    const removeCategorySelection = (category: string) => {
+        setAcSearchInput('');
+        resetField('category');
     }
 
     const { data: options, isError, isSuccess, refetch, isLoading } = useQuery(
@@ -121,6 +125,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
                         onChange={setAcSearchInput}
                         onSelect={onAutocompleteSelect}
                         onCreate={addCategory}
+                        onRemove={removeCategorySelection}
                         addIcon={<AddCategoryIcon size={18} />}
                         placeholder={`${t('AddMovementFormPlaceHolderCategories')}`}
                     />

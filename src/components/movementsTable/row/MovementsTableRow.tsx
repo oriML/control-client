@@ -66,7 +66,7 @@ function MovementsTableRow({
             </OddRowWrapper>
             <EvenRowWrapper>
                 <span>
-                    {tableRowData?.category?.name || 'לטפל בקטגוריות'}
+                    {tableRowData?.category?.name}
                 </span>
             </EvenRowWrapper>
             <OddRowWrapper>
