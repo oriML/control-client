@@ -1,6 +1,15 @@
 import React, { useEffect, useRef, useState } from "react"
 
-export default function Autocomplete({ options, value, placeholder, onChange, onSelect, addIcon, inputControl }: any) {
+export default function Autocomplete({
+    options,
+    value,
+    placeholder,
+    onChange,
+    onSelect,
+    onCreate,
+    addIcon,
+    inputControl
+}: any) {
 
     const [showOptions, setShowOptions] = useState(false)
     const [cursor, setCursor] = useState(-1)
@@ -10,6 +19,11 @@ export default function Autocomplete({ options, value, placeholder, onChange, on
         onSelect(option);
         onChange(option.name);
         setShowOptions(false);
+    }
+
+    const create = async () => {
+        const category = await onCreate();
+        select(category);
     }
 
     const handleChange = (option: any) => {
@@ -80,10 +94,14 @@ export default function Autocomplete({ options, value, placeholder, onChange, on
 
             <ul className={`dir-rtl absolute w-full rounded-lg bg-white shadow-lg z-50 ${!showOptions && 'hidden'} select-none`}>
                 {
-                    value.length > 0 ? <li className="px-4 py-2 text-gray-400 cursor-pointer hover:bg-green-400 hover:text-white flex gap-2">
-                        <span>{addIcon}</span>
-                        <span>{value}</span>
-                    </li> : null
+                    value.length > 0 ?
+                        <li className="px-4 py-2 text-gray-400 cursor-pointer hover:bg-green-400 hover:text-white flex gap-2"
+                            onClick={() => create()}
+                        >
+                            <span>{addIcon}</span>
+                            <span>{value}</span>
+                        </li>
+                        : null
                 }
                 {
                     filteredOptions.length > 0 ? filteredOptions.map((option: any, i: number, arr: any[]) => {
