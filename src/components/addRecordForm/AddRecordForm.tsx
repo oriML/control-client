@@ -148,7 +148,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
                     <div className="w-full text-end text-gray-400 px-0.5">
                         {t('AddMovementFormTitleSource')}
                     </div>
-                    <div className="flex justify-around text-center my-3">
+                    <div className="flex md:flex-row md:gap-2 justify-around text-center my-3 flex-col items-center gap-3">
                         {
                             Object.values(MovementSourceType).map((v) => (
                                 typeof v === 'number' ?
