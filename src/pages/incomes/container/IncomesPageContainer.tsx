@@ -5,6 +5,7 @@ import IncomesPageList from '../list/IncomesPageList'
 import { MovementsPageTitleIcon } from '../../../icons';
 import PageTitle from '../../../components/pageTitle/PageTitle';
 import PageTab from '../../../components/pageTab/PageTab';
+import IncomesGuard from '../incomes.guard';
 
 export function IncomesPageContainer() {
 
@@ -18,15 +19,15 @@ export function IncomesPageContainer() {
         setCriteria(newCriteria);
     }
 
-
-
     return (
-        <>
+        <IncomesGuard>
+
             <PageTitle title='טבלת הכנסות חודשית' icon={MovementsPageTitleIcon} />
+
             <PageTab text={`${criteria.month}/${criteria.year}`} />
 
             <IncomesPageList criteria={criteria} queryKey={'incomes'} setRequestCriteria={setRequestCriteria} />
 
-        </>
+        </IncomesGuard>
     )
 }

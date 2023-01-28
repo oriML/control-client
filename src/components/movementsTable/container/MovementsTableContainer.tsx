@@ -102,6 +102,9 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
     const { data, isError, isSuccess, refetch, isLoading } = useQuery(
         [queryKey, criteria],
         () => getMovementsByCriteria(),
+        {
+            refetchOnWindowFocus: false,
+        }
         // { getNextPageParam: (page: any) => (page.current_page === page.last_page ? undefined : page.current_page + 1) },
     )
 
