@@ -1,11 +1,10 @@
 import React from 'react'
+import './style.css'
 
 function Loader() {
     return (
-        <div className="w-full h-full">
-            <span className="m-auto text-center w-full">
-                Loading...
-            </span>
+        <div className="w-full h-full flex justify-center">
+            <span className="loader mt-4"></span>
         </div>
     )
 }
