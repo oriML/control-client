@@ -13,6 +13,7 @@ import MovementsTableList from '../list/MovementsTableList'
 import { server } from '../../../utils/environment-vars'
 import { useTranslation } from 'react-i18next'
 import { AddMovementFormModel } from '../../../models/movements/movement.model'
+import Loader from '../../loader/Loader'
 
 interface IMovementsTableContainerProps {
     criteria: MovementCriteria
@@ -42,8 +43,6 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
     const [toggleDeleteModal, setToggleDeleteModal] = React.useState<boolean>(false);
 
     const [selectedMovement, setSelectedMovement] = React.useState<MovementResponseModel | undefined>(undefined);
-
-    const loadMoreResultsRef = React.useRef(null);
 
     const getNextMonthResults = () => {
 
@@ -128,18 +127,23 @@ export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria
 
                                     </div>
                                     <div className="min-h-[540px] max-h-[540px] bg-gray-100 overflow-auto">
-                                        <MovementsTableList
-                                            tableList={data?.data?.movements}
-                                            setToggleDeleteModal={setToggleDeleteModal}
-                                            setToggleEditModal={setToggleEditModal}
-                                            setSelectedMovement={setSelectedMovement}
+                                        {
+                                            isLoading ?
+                                                <Loader />
+                                                :
+                                                isSuccess && data?.data?.movements?.length > 0 ?
+                                                    <MovementsTableList
+                                                        tableList={data?.data?.movements}
+                                                        setToggleDeleteModal={setToggleDeleteModal}
+                                                        setToggleEditModal={setToggleEditModal}
+                                                        setSelectedMovement={setSelectedMovement}
 
-                                        />
+                                                    />
+                                                    :
+                                                    <span>No data to show</span>
+                                        }
                                     </div>
 
-                                    {/* 
-                                    LAODER!!!!!!!!!!!!!!!!!!!!!!!
-                                */}
                                     <div className="px-5 py-5 bg-white border-t flex flex-row-reverse xs:flex-row items-center justify-center xs:justify-between relative">
                                         <div className="mt-2 inline-flex xs:mt-0">
                                             <button
