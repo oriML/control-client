@@ -1,1 +1,0 @@
-export { TemplatesPageContainer as default } from './container/TemplatesPageContainer'

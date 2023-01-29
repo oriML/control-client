@@ -1,1 +1,0 @@
-export { HeaderContainer as default } from './container/HeaderContainer'

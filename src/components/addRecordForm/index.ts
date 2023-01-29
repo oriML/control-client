@@ -1,1 +1,0 @@
-export { AddRecordForm as default } from './AddRecordForm'
