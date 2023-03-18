@@ -6,6 +6,7 @@ import {
     MenuRowProfileIcon,
     MenuRowTemplatesIcon,
 } from "../icons";
+import { server } from "./environment-vars";
 
 
 
@@ -61,3 +62,10 @@ export const movementsTableColumns = [
         title: 'הערות'
     },
 ]
+
+
+export const apiRoutes = {
+    movements: {
+        getMovements: server + `movement/getAllMovements/`
+    }
+}

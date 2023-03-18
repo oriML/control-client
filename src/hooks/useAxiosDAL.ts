@@ -15,16 +15,16 @@ export function useAxiosDAL() {
     }
 
     // get
-    function Get(url: string) {
-        return axios.get(url, config)
+    function Get(url: string, params?: object) {
+        return axios.get(url, { ...config, ...params })
     }
     // post
-    function Post(url: string, data: any) {
-        return axios.post(url, data, config)
+    function Post(url: string, data: any, params?: object) {
+        return axios.post(url, data, { ...config, ...params })
     }
     // delete
-    function Delete(url: string) {
-        return axios.delete(url, config)
+    function Delete(url: string, params?: object) {
+        return axios.delete(url, { ...config, ...params })
     }
 
 
