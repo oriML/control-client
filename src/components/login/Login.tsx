@@ -3,16 +3,16 @@ import React, { FormEventHandler, ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
 import { UseMutationResult } from 'react-query'
 import { Link } from 'react-router-dom'
-import ErrorMessage from '../../../components/error-message/ErrorMessage'
-import Loader from '../../../components/loader/Loader'
-import { UserLoginModel } from '../../../models/user/UserLoginModel'
+import ErrorMessage from '../error-message/ErrorMessage'
+import Loader from '../loader/Loader'
+import { UserLoginModel } from '../../models/user/UserLoginModel'
 
-interface ILoginPageListProps {
+interface ILoginProps {
     onSubmit: (model: UserLoginModel) => void,
     children: ReactNode
 }
 
-function LoginPageList({ onSubmit, children }: ILoginPageListProps) {
+function Login({ onSubmit, children }: ILoginProps) {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<UserLoginModel>();
 
@@ -86,4 +86,4 @@ function LoginPageList({ onSubmit, children }: ILoginPageListProps) {
     )
 }
 
-export default LoginPageList
+export default Login

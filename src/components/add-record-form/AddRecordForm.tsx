@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useQuery } from 'react-query'
-import { AddRecordFormInputs } from '../../models/form/form.types';
-import { AddMovementFormModel, MovementModel } from '../../models/movements/movement.model';
+import { AddMovementFormModel } from '../../models/movements/movement.model';
 import { MovementSourceType, MovementType } from '../../types/movementSource.type';
-import { ChildrenProps } from '../../pages/addRecordDialog/types';
-import AlertModal from '../alert-modal/AlertModal';
-import Modal from '../modal/Modal';
 import { MovementResponseModel } from '../../models/movements/movementResponse.model';
 
 import { useTranslation } from 'react-i18next'
@@ -14,6 +10,7 @@ import Autocomplete from '../autocomplete/Autocomplete';
 import { useAxiosDAL } from '../../hooks/useAxiosDAL';
 import { server } from '../../utils/environment-vars'
 import { AddCategoryIcon } from '../../icons';
+import { ChildrenProps } from '../add-record-modal/types';
 
 const initialColorsStates = -1;
 

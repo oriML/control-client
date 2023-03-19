@@ -1,16 +1,16 @@
-import HomePageContainer from "./home";
+import HomePage from "./home";
 import IncomesPageContainer from "./incomes";
-import LoginPageContainer from "./login";
+import LoginPage from "./login";
 import OutcomesPageContainer from "./outcomes";
-import ProfilePageContainer from "./profile";
-import RegisterPageContainer from "./register";
+import ProfilePage from "./profile";
+import RegisterPage from "./register";
 import TemplatesPageContainer from "./templates";
 
 export {
-    HomePageContainer,
-    LoginPageContainer,
-    RegisterPageContainer,
-    ProfilePageContainer,
+    HomePage,
+    LoginPage,
+    RegisterPage,
+    ProfilePage,
     IncomesPageContainer,
     OutcomesPageContainer,
     TemplatesPageContainer

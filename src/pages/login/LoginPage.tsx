@@ -2,15 +2,15 @@ import axios from 'axios';
 import React, { FormEvent, FormEventHandler } from 'react'
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import ErrorMessage from '../../../components/error-message/ErrorMessage';
-import Loader from '../../../components/loader/Loader';
-import SingleFormContainer from '../../../components/single-form-container/SingleFormContainer';
-import { useAxiosDAL } from '../../../hooks/useAxiosDAL';
-import useLocalStorage from '../../../hooks/useLocalStorage';
-import { UserLoginModel, ILoginPageProps } from '../../../models/user/UserLoginModel'
-import LoginPageList from '../list/LoginPageList'
+import ErrorMessage from '../../components/error-message/ErrorMessage';
+import Loader from '../../components/loader/Loader';
+import Login from '../../components/login/Login';
+import { SingleFormWrapper } from '../../components/single-form-wrapper/SingleFormWrapper';
+import { useAxiosDAL } from '../../hooks/useAxiosDAL';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import { UserLoginModel, ILoginPageProps } from '../../models/user/UserLoginModel'
 
-export function LoginPageContainer() {
+export function LoginPage() {
 
     // todo:
     // when logged and returned true
@@ -45,8 +45,8 @@ export function LoginPageContainer() {
     }
 
     return (
-        <SingleFormContainer>
-            <LoginPageList onSubmit={onSubmit}>
+        <SingleFormWrapper>
+            <Login onSubmit={onSubmit}>
                 <div className="relative">
                     <div className="absolute bottom-0 text-center m-auto w-full">
                         {
@@ -62,7 +62,7 @@ export function LoginPageContainer() {
                         }
                     </div>
                 </div>
-            </LoginPageList>
-        </SingleFormContainer>
+            </Login>
+        </SingleFormWrapper>
     )
 }
