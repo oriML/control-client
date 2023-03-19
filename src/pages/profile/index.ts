@@ -1,1 +1,1 @@
-export { ProfilePageContainer as default } from './container/ProfilePageContainer'
+export { ProfilePage as default } from './ProfilePage'

@@ -1,13 +1,12 @@
-import React from 'react'
-import { AddRecordList } from '../list/AddRecordList'
-import { useAxiosDAL } from '../../../hooks/useAxiosDAL'
-import { AddMovementFormModel, MovementModel } from '../../../models/movements/movement.model'
+import { useAxiosDAL } from '../../hooks/useAxiosDAL'
+import { AddMovementFormModel } from '../../models/movements/movement.model'
 import { useMutation } from 'react-query'
-import { MovementResponseModel } from '../../../models/movements/movementResponse.model'
+import { MovementResponseModel } from '../../models/movements/movementResponse.model'
 
-import { server } from '../../../utils/environment-vars'
+import { server } from '../../utils/environment-vars'
+import { AddRecordForm } from '../add-record-form/AddRecordForm'
 
-export function AddRecordContainer(): JSX.Element {
+export function AddRecordModal(): JSX.Element {
 
   const {
     REACT_APP_URI_MOVEMENTS
@@ -31,7 +30,9 @@ export function AddRecordContainer(): JSX.Element {
       <h1 className="text-2xl text-gray-700 font-bold mb-8 text-center">הזנת תנועה חדשה</h1>
 
       <div className="w-4/12 mx-auto min-w-[270px]">
-        <AddRecordList onSubmit={onSubmit} />
+        <div className="border border-gray-200 bg-white rounded border-solid px-6 py-8">
+          <AddRecordForm onSubmit={onSubmit} />
+        </div>
       </div>
     </section>
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import MovementsTableContainer from '../../../components/movementsTable/container/MovementsTableContainer'
+import MovementsTableContainer from '../../../components/movements-table/container/MovementsTableContainer'
 import { MovementCriteria } from '../../../models/movements/movementCriteria.model'
 interface IOutcomesPageListProps {
     criteria: MovementCriteria

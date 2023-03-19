@@ -3,14 +3,13 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next'
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import ErrorMessage from '../../../components/errorMessage/ErrorMessage';
-import SingleFormContainer from '../../../components/singleFormContainer/SingleFormContainer';
-import { useAxiosDAL } from '../../../hooks/useAxiosDAL';
-import useLocalStorage from '../../../hooks/useLocalStorage';
-import { IRegisterForm, UserRegisterModel } from '../../../models/user/UserRegisterModel';
-import RegisterPageList from '../list/RegisterPageList'
+import ErrorMessage from '../../components/error-message/ErrorMessage';
+import { SingleFormWrapper } from '../../components/single-form-wrapper/SingleFormWrapper';
+import { useAxiosDAL } from '../../hooks/useAxiosDAL';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import { IRegisterForm, UserRegisterModel } from '../../models/user/UserRegisterModel';
 
-export function RegisterPageContainer() {
+export function RegisterPage() {
     const { Post } = useAxiosDAL();
     const { SetItem } = useLocalStorage();
     const history = useHistory();
@@ -42,7 +41,7 @@ export function RegisterPageContainer() {
     };
 
     return (
-        <SingleFormContainer>
+        <SingleFormWrapper>
             <div className="h-full">
                 <form className="h-full" onSubmit={handleSubmit(onSubmitForm)}>
                     <p className="my-4 text-center">
@@ -117,6 +116,6 @@ export function RegisterPageContainer() {
                     </div>
                 </form>
             </div>
-        </SingleFormContainer>
+        </SingleFormWrapper>
     )
 }

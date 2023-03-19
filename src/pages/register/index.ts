@@ -1,1 +1,1 @@
-export { RegisterPageContainer as default } from './container/RegisterPageContainer'
+export { RegisterPage as default } from './RegisterPage'

@@ -1,22 +1,22 @@
 import React, { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { AuthHandler } from '../components/authHandler'
-import { HomePageContainer, LoginPageContainer, RegisterPageContainer } from '../pages'
+import { AuthHandler } from '../components/auth-handler'
+import { HomePage, LoginPage, RegisterPage } from '../pages'
 
 
 function Router() {
   return (
     <Switch>
 
-      <Route exact path={'/login'} component={LoginPageContainer} />
+      <Route exact path={'/login'} component={LoginPage} />
 
-      <Route path={'/register'} component={RegisterPageContainer} />
+      <Route path={'/register'} component={RegisterPage} />
 
       <AuthHandler>
 
         <Suspense fallback={<h1>Loading...</h1>}>
 
-          <Route exact path={'/'} render={withProps(HomePageContainer)} />
+          <Route exact path={'/'} render={withProps(HomePage)} />
 
           <Route path={'/incomes'} render={withProps(lazy(() => import('../pages/incomes')))} />
 
@@ -26,7 +26,7 @@ function Router() {
 
           <Route path={'/profile'} render={withProps(lazy(() => import('../pages/profile')))} />
 
-          <Route path={'/addMovement'} render={withProps(lazy(() => import('../pages/addRecordDialog')))} />
+          <Route path={'/add-movement'} render={withProps(lazy(() => import('../components/add-record-modal')))} />
 
         </Suspense>
 

@@ -5,15 +5,15 @@ import { GetAllMovementsResponseModel } from '../../../models/movements/getAllMo
 import { MovementCriteria } from '../../../models/movements/movementCriteria.model'
 import { MovementResponseModel } from '../../../models/movements/movementResponse.model'
 import { movementsTableColumns } from '../../../utils/constants'
-import AddRecordForm from '../../addRecordForm'
-import AlertModal from '../../alertModal/AlertModal'
-import SubmitModal from '../../submitModal/SubmitModal'
+import AddRecordForm from '../../add-record-form'
+import AlertModal from '../../alert-modal/AlertModal'
 import MovementsTableList from '../list/MovementsTableList'
 
 import { server } from '../../../utils/environment-vars'
 import { useTranslation } from 'react-i18next'
 import { AddMovementFormModel } from '../../../models/movements/movement.model'
 import Loader from '../../loader/Loader'
+import SubmitModal from '../../submit-modal/SubmitModal'
 
 interface IMovementsTableContainerProps {
     criteria: MovementCriteria

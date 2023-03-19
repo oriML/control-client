@@ -1,1 +1,1 @@
-export { HomePageContainer as default } from './container/HomePageContainer'
+export { HomePageContainer as default } from './HomePage'

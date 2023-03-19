@@ -20,7 +20,7 @@ export const menuRows = [
     },
     {
         title: 'תנועה חדשה',
-        path: '/addMovement',
+        path: '/add-movement',
         icon: MenuRowAddMovementIcon
     },
     {
