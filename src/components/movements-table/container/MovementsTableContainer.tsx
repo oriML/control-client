@@ -5,8 +5,8 @@ import { GetAllMovementsResponseModel } from '../../../models/movements/getAllMo
 import { MovementCriteria } from '../../../models/movements/movementCriteria.model'
 import { MovementResponseModel } from '../../../models/movements/movementResponse.model'
 import { movementsTableColumns } from '../../../utils/constants'
-import AddRecordForm from '../../addRecordForm'
-import AlertModal from '../../alertModal/AlertModal'
+import AddRecordForm from '../../add-record-form'
+import AlertModal from '../../alert-modal/AlertModal'
 import SubmitModal from '../../submitModal/SubmitModal'
 import MovementsTableList from '../list/MovementsTableList'
 

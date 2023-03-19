@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next'
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import ErrorMessage from '../../../components/errorMessage/ErrorMessage';
-import SingleFormContainer from '../../../components/singleFormContainer/SingleFormContainer';
+import ErrorMessage from '../../../components/error-message/ErrorMessage';
+import SingleFormContainer from '../../../components/single-form-container/SingleFormContainer';
 import { useAxiosDAL } from '../../../hooks/useAxiosDAL';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { IRegisterForm, UserRegisterModel } from '../../../models/user/UserRegisterModel';

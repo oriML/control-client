@@ -3,8 +3,8 @@ import { MovementCriteria } from '../../../models/movements/movementCriteria.mod
 import { MovementType } from '../../../types/movementSource.type';
 import OutcomesPageList from '../list/OutcomesPageList'
 import { MovementsPageTitleIcon } from '../../../icons';
-import PageTitle from '../../../components/pageTitle/PageTitle';
-import PageTab from '../../../components/pageTab/PageTab';
+import PageTitle from '../../../components/page-title/PageTitle';
+import PageTab from '../../../components/page-tab/PageTab';
 
 export function OutcomesPageContainer() {
 

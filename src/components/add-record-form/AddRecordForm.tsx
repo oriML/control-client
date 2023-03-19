@@ -5,7 +5,7 @@ import { AddRecordFormInputs } from '../../models/form/form.types';
 import { AddMovementFormModel, MovementModel } from '../../models/movements/movement.model';
 import { MovementSourceType, MovementType } from '../../types/movementSource.type';
 import { ChildrenProps } from '../../pages/addRecordDialog/types';
-import AlertModal from '../alertModal/AlertModal';
+import AlertModal from '../alert-modal/AlertModal';
 import Modal from '../modal/Modal';
 import { MovementResponseModel } from '../../models/movements/movementResponse.model';
 

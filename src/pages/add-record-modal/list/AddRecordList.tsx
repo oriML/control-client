@@ -1,5 +1,5 @@
 import React from 'react'
-import AddRecordForm from '../../../components/addRecordForm'
+import AddRecordForm from '../../../components/add-record-form'
 import { ChildrenProps } from '../types'
 
 

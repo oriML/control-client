@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { FormEvent, FormEventHandler } from 'react'
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import ErrorMessage from '../../../components/errorMessage/ErrorMessage';
+import ErrorMessage from '../../../components/error-message/ErrorMessage';
 import Loader from '../../../components/loader/Loader';
-import SingleFormContainer from '../../../components/singleFormContainer/SingleFormContainer';
+import SingleFormContainer from '../../../components/single-form-container/SingleFormContainer';
 import { useAxiosDAL } from '../../../hooks/useAxiosDAL';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { UserLoginModel, ILoginPageProps } from '../../../models/user/UserLoginModel'

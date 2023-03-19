@@ -3,7 +3,7 @@ import React, { FormEventHandler, ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
 import { UseMutationResult } from 'react-query'
 import { Link } from 'react-router-dom'
-import ErrorMessage from '../../../components/errorMessage/ErrorMessage'
+import ErrorMessage from '../../../components/error-message/ErrorMessage'
 import Loader from '../../../components/loader/Loader'
 import { UserLoginModel } from '../../../models/user/UserLoginModel'
 

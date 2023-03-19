@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { AuthHandler } from '../components/authHandler'
+import { AuthHandler } from '../components/auth-handler'
 import { HomePageContainer, LoginPageContainer, RegisterPageContainer } from '../pages'
 
 
