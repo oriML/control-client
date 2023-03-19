@@ -1,1 +1,1 @@
-export { OutcomesPageContainer as default } from './container/OutcomesPageContainer'
+export { OutcomesPage as default } from './OutcomesPage'
