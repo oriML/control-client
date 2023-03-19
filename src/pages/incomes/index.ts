@@ -1,1 +1,1 @@
-export { IncomesPageContainer as default } from './container/IncomesPageContainer'
+export { IncomesPage as default } from './IncomesPage'
