@@ -3,7 +3,7 @@ import { AlertIcon } from '../../icons'
 import Modal from '../modal/Modal'
 
 interface IModalProps {
-    onSubmit: React.MouseEventHandler<HTMLButtonElement>
+    onSubmit: (id: string) => void
     closeModal: (bool: boolean) => void
     title: string
     text: string
@@ -25,7 +25,7 @@ function AlertModal({ onSubmit, closeModal, title, text, children }: IModalProps
                 <button
                     className="text-white bg-green-500 active:bg-green-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                     type="button"
-                    onClick={onSubmit}
+                    onClick={((e) => onSubmit(e.currentTarget.value))}
                 >
                     אישור
                 </button>

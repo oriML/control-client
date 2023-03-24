@@ -7,7 +7,7 @@ import { MovementResponseModel } from '../../models/movements/movementResponse.m
 
 import { useTranslation } from 'react-i18next'
 import Autocomplete from '../autocomplete/Autocomplete';
-import { useAxiosDAL } from '../../hooks/useAxiosDAL';
+import { useAxiosDAL } from '../../hooks/shared/useAxiosDAL';
 import { server } from '../../utils/environment-vars'
 import { AddCategoryIcon } from '../../icons';
 import { ChildrenProps } from '../add-record-modal/types';

@@ -1,4 +1,4 @@
-import { useAxiosDAL } from '../../hooks/useAxiosDAL'
+import { useAxiosDAL } from '../../hooks/shared/useAxiosDAL'
 import { AddMovementFormModel } from '../../models/movements/movement.model'
 import { useMutation } from 'react-query'
 import { MovementResponseModel } from '../../models/movements/movementResponse.model'

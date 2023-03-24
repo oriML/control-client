@@ -6,8 +6,8 @@ import ErrorMessage from '../../components/error-message/ErrorMessage';
 import Loader from '../../components/loader/Loader';
 import Login from '../../components/login/Login';
 import { SingleFormWrapper } from '../../components/single-form-wrapper/SingleFormWrapper';
-import { useAxiosDAL } from '../../hooks/useAxiosDAL';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import { useAxiosDAL } from '../../hooks/shared/useAxiosDAL';
+import useLocalStorage from '../../hooks/shared/useLocalStorage';
 import { UserLoginModel, ILoginPageProps } from '../../models/user/UserLoginModel'
 
 export function LoginPage() {

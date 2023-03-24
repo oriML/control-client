@@ -1,7 +1,5 @@
-import React, { ReactNode } from 'react'
+import { MouseEventHandler, ReactNode, useState } from 'react'
 import { useInfiniteQuery, useQuery } from 'react-query'
-import { useAxiosDAL } from '../../../hooks/useAxiosDAL'
-import { GetAllMovementsResponseModel } from '../../../models/movements/getAllMovementsResponse.model'
 import { MovementCriteria } from '../../../models/movements/movementCriteria.model'
 import { MovementResponseModel } from '../../../models/movements/movementResponse.model'
 import { movementsTableColumns } from '../../../utils/constants'
@@ -9,15 +7,16 @@ import AddRecordForm from '../../add-record-form'
 import AlertModal from '../../alert-modal/AlertModal'
 import MovementsTableList from '../list/MovementsTableList'
 
-import { server } from '../../../utils/environment-vars'
 import { useTranslation } from 'react-i18next'
-import { AddMovementFormModel } from '../../../models/movements/movement.model'
 import Loader from '../../loader/Loader'
 import SubmitModal from '../../submit-modal/SubmitModal'
+import { useMovements } from '../../../hooks/useMovements'
+import { MovementType } from '../../../types/movementSource.type'
 
 interface IMovementsTableContainerProps {
     criteria: MovementCriteria
     queryKey: string
+    type: number
     setRequestCriteria: (newCriteria: MovementCriteria) => void
 
 }
@@ -30,82 +29,32 @@ const ColumnHeader = ({ children }: { children?: ReactNode }) => (
     </div>
 )
 
-export function MovementsTableContainer({ criteria, queryKey, setRequestCriteria }: IMovementsTableContainerProps) {
+export function MovementsTableContainer({ criteria, queryKey, type, setRequestCriteria }: IMovementsTableContainerProps) {
 
     const { t } = useTranslation();
+    const {
+        getNextMonthResults,
+        getPrevMonthResults,
+        getMovementsByCriteria,
+        updateMovement,
+        deleteMovement,
+        data,
+        refetch,
+        isError,
+        isSuccess,
+        isLoading
+    } = useMovements(type, queryKey);
 
-    const { REACT_APP_URI_MOVEMENTS } = process.env;
+    const [toggleEditModal, setToggleEditModal] = useState<boolean>(false);
 
-    const { Post, Delete } = useAxiosDAL();
+    const [toggleDeleteModal, setToggleDeleteModal] = useState<boolean>(false);
 
-    const [toggleEditModal, setToggleEditModal] = React.useState<boolean>(false);
+    const [selectedMovement, setSelectedMovement] = useState<MovementResponseModel | undefined>(undefined);
 
-    const [toggleDeleteModal, setToggleDeleteModal] = React.useState<boolean>(false);
-
-    const [selectedMovement, setSelectedMovement] = React.useState<MovementResponseModel | undefined>(undefined);
-
-    const getNextMonthResults = () => {
-
-        if (criteria.month <= 12) {
-
-            const newCriteria: MovementCriteria = {
-                ...criteria,
-                year: (criteria.month === 12 ? criteria.year + 1 : criteria.year),
-                month: (criteria.month === 12 ? 1 : criteria.month + 1)
-            } as MovementCriteria;
-
-            setRequestCriteria(newCriteria);
-        }
-    };
-
-    const getPrevMonthResults = () => {
-        if (criteria.month >= 1) {
-
-            const newCriteria: MovementCriteria = {
-                ...criteria,
-                year: (criteria.month === 1 ? criteria.year - 1 : criteria.year),
-                month: (criteria.month === 1 ? 12 : criteria.month - 1)
-            } as MovementCriteria;
-
-            setRequestCriteria(newCriteria);
-        }
-    };
-
-    const getMovementsByCriteria = async () => {
-        return Post(`${server}${REACT_APP_URI_MOVEMENTS}/getAllMovements`, criteria);
-    };
-
-    const updateMovement = async (movement: MovementResponseModel | AddMovementFormModel) => {
-        try {
-            await Post(`${server}/${REACT_APP_URI_MOVEMENTS}/update/${movement?._id}`
-                , movement
-            );
-            setSelectedMovement(undefined);
-            setToggleEditModal(false);
-            refetch();
-        } catch (error) {
-            alert(error);
-        }
+    const resetUI = () => {
+        setSelectedMovement(undefined);
+        setToggleDeleteModal(false);
     }
-
-    const deleteMovement = async () => {
-        try {
-            await Delete(`${server}${REACT_APP_URI_MOVEMENTS}/delete/${selectedMovement?._id}`);
-            setSelectedMovement(undefined);
-            setToggleDeleteModal(false);
-            refetch();
-        } catch (error) {
-            alert(error);
-        }
-    }
-
-    const { data, isError, isSuccess, refetch, isLoading } = useQuery(
-        [queryKey, criteria],
-        () => getMovementsByCriteria(),
-        // { getNextPageParam: (page: any) => (page.current_page === page.last_page ? undefined : page.current_page + 1) },
-    )
-
-
 
     return (
         <>

@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { QueryFunctionContext, useInfiniteQuery, useMutation, useQuery, useQueryClient, UseQueryOptions } from "react-query";
-import { useAxiosDAL } from "../hooks/useAxiosDAL";
+import { useAxiosDAL } from "../hooks/shared/useAxiosDAL";
 import { GetInfinitePagesInterface } from "../models";
 
 type QueryKeyT = [string, object | undefined];

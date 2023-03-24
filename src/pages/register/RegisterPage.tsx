@@ -5,8 +5,8 @@ import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import ErrorMessage from '../../components/error-message/ErrorMessage';
 import { SingleFormWrapper } from '../../components/single-form-wrapper/SingleFormWrapper';
-import { useAxiosDAL } from '../../hooks/useAxiosDAL';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import { useAxiosDAL } from '../../hooks/shared/useAxiosDAL';
+import useLocalStorage from '../../hooks/shared/useLocalStorage';
 import { IRegisterForm, UserRegisterModel } from '../../models/user/UserRegisterModel';
 
 export function RegisterPage() {

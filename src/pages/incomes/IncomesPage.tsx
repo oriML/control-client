@@ -18,8 +18,6 @@ export function IncomesPage() {
         setCriteria(newCriteria);
     }
 
-
-
     return (
         <>
             <PageTitle title='טבלת הכנסות חודשית' icon={MovementsPageTitleIcon} />
@@ -27,7 +25,7 @@ export function IncomesPage() {
 
             <section className="py-10 px-6 bg-slate-200">
 
-                <MovementsTableContainer criteria={criteria} queryKey={'incomes'} setRequestCriteria={setRequestCriteria} />
+                <MovementsTableContainer criteria={criteria} type={MovementType.income} queryKey={'incomes'} setRequestCriteria={setRequestCriteria} />
 
             </section>
         </>

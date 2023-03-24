@@ -25,7 +25,7 @@ export function OutcomesPage() {
             <PageTitle title='טבלת הוצאות חודשית' icon={MovementsPageTitleIcon} />
             <PageTab text={`${criteria.month}/${criteria.year}`} />
             <section className="py-10 px-6 bg-slate-200">
-                <MovementsTableContainer criteria={criteria} queryKey={'outcomes'} setRequestCriteria={setRequestCriteria} />
+                <MovementsTableContainer criteria={criteria} type={MovementType.outcome} queryKey={'outcomes'} setRequestCriteria={setRequestCriteria} />
             </section>
         </>
     )
