@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useHistory } from 'react-router-dom';
-import useLocalStorage from '../../../hooks/useLocalStorage';
+import useLocalStorage from '../../../hooks/shared/useLocalStorage';
 import { LogoutIcon } from '../../../icons';
 
 const logo = require('../../../img/money-lock.png');
