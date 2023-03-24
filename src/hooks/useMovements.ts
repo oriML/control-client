@@ -57,7 +57,7 @@ export const useMovements = (type: number, queryKey: string) => {
     };
 
     const getMovementsByCriteria = async () => {
-        return Post(`${server}${REACT_APP_URI_MOVEMENTS}/getAllMovements`, criteria);
+        return Post(`${server}/${REACT_APP_URI_MOVEMENTS}/getAllMovements`, criteria);
     };
 
     const updateMovement = async (movement: MovementResponseModel | AddMovementFormModel) => {
@@ -73,7 +73,7 @@ export const useMovements = (type: number, queryKey: string) => {
 
     const deleteMovement = async (id: string) => {
         try {
-            await Delete(`${server}${REACT_APP_URI_MOVEMENTS}/delete/${id}`);
+            await Delete(`${server}/${REACT_APP_URI_MOVEMENTS}/delete/${id}`);
             refetch();
         } catch (error) {
             alert(error);
