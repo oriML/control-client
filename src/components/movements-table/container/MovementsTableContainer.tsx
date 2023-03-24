@@ -56,6 +56,13 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
         setToggleDeleteModal(false);
     }
 
+    const onDelete = () => {
+        if (selectedMovement != undefined && selectedMovement?._id) {
+            deleteMovement(selectedMovement._id);
+        }
+        resetUI();
+    }
+
     return (
         <>
             <section className="-mx-4 px-4 sm:px-8 overflow-x-auto min-h-[470px]">
@@ -150,7 +157,7 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
                         text={`אתה עומד למחוק תנועה. אתה בטוח שברצונך להמשיך?`}
                         closeModal={() => setToggleDeleteModal(false)}
                         children={<></>}
-                        onSubmit={deleteMovement}
+                        onSubmit={onDelete}
                     />
                     : null
             }
