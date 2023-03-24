@@ -55,6 +55,7 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
     const resetUI = () => {
         setSelectedMovement(undefined);
         setToggleDeleteModal(false);
+        setToggleEditModal(false);
     }
 
     const onUpdate = (model: AddMovementFormModel) => {
