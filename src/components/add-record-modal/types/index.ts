@@ -4,5 +4,5 @@ import { AxiosResponse } from 'axios'
 import { MovementResponseModel } from "../../../models/movements/movementResponse.model";
 
 export type ChildrenProps = {
-    onSubmit: UseMutateFunction<AxiosResponse<any, any>, unknown, MovementResponseModel | AddMovementFormModel, unknown>,
+    onSubmit: (model: AddMovementFormModel) => void,
 }

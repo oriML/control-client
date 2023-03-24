@@ -12,6 +12,7 @@ import Loader from '../../loader/Loader'
 import SubmitModal from '../../submit-modal/SubmitModal'
 import { useMovements } from '../../../hooks/useMovements'
 import { MovementType } from '../../../types/movementSource.type'
+import { AddMovementFormModel } from '../../../models/movements/movement.model'
 
 interface IMovementsTableContainerProps {
     criteria: MovementCriteria
@@ -54,6 +55,25 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
     const resetUI = () => {
         setSelectedMovement(undefined);
         setToggleDeleteModal(false);
+        setToggleEditModal(false);
+    }
+
+    const onUpdate = (model: AddMovementFormModel) => {
+        if (model != null) {
+            updateMovement(model);
+            resetUI();
+        } else {
+            console.error("model is null")
+        }
+    }
+
+    const onDelete = () => {
+        if (selectedMovement != undefined && selectedMovement?._id) {
+            deleteMovement(selectedMovement._id);
+            resetUI();
+        } else {
+            console.error("selected movement is undeifned or null")
+        }
     }
 
     return (
@@ -133,7 +153,7 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
                         children={
                             <div className="m-auto w-full px-2 py-12 bg-white border-0 shadow-sm">
                                 <AddRecordForm
-                                    onSubmit={updateMovement}
+                                    onSubmit={onUpdate}
                                     movement={selectedMovement}
                                 />
                             </div>
@@ -150,7 +170,7 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
                         text={`אתה עומד למחוק תנועה. אתה בטוח שברצונך להמשיך?`}
                         closeModal={() => setToggleDeleteModal(false)}
                         children={<></>}
-                        onSubmit={deleteMovement}
+                        onSubmit={onDelete}
                     />
                     : null
             }
