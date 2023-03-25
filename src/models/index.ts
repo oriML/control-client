@@ -1,4 +1,4 @@
-export interface GetInfinitePagesInterface<T> {
+export interface InfinitePagesInterface<T> {
     nextId?: number;
     previousId?: number;
     data: T;

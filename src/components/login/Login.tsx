@@ -1,22 +1,18 @@
-import { AxiosResponse } from 'axios'
-import React, { FormEventHandler, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
-import { UseMutationResult } from 'react-query'
 import { Link } from 'react-router-dom'
+import { IUserLogin } from '../../models/user/user.DTO'
 import ErrorMessage from '../error-message/ErrorMessage'
-import Loader from '../loader/Loader'
-import { UserLoginModel } from '../../models/user/UserLoginModel'
-
 interface ILoginProps {
-    onSubmit: (model: UserLoginModel) => void,
+    onSubmit: (model: IUserLogin) => void,
     children: ReactNode
 }
 
 function Login({ onSubmit, children }: ILoginProps) {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<UserLoginModel>();
+    const { register, handleSubmit, formState: { errors } } = useForm<IUserLogin>();
 
-    function onSubmitForm(data: UserLoginModel): void {
+    function onSubmitForm(data: IUserLogin): void {
         onSubmit(data);
     };
     return (

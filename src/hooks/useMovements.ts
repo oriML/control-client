@@ -1,10 +1,8 @@
-import axios from "axios"
+import { AxiosResponse } from "axios";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { AddMovementFormModel } from "../models/movements/movement.model";
-import { MovementCriteria } from "../models/movements/movementCriteria.model";
-import { MovementResponseModel } from "../models/movements/movementResponse.model";
-import { MovementType } from "../types/movementSource.type";
+import { Movement, MovementResponseModel } from "../models/movements/movement.DTO";
+import { MovementCriteria } from "../models/movements/movement.DTO";
 import { server } from "../utils/environment-vars";
 import { useAxiosDAL } from "./shared/useAxiosDAL";
 
@@ -21,7 +19,7 @@ export const useMovements = (type: number, queryKey: string) => {
 
     const [criteria, setCriteria] = useState<MovementCriteria>(initCriteriaState);
 
-    const { data, isError, isSuccess, refetch, isLoading } = useQuery(
+    const { data: response, isError, isSuccess, refetch, isLoading } = useQuery<{}, {}, AxiosResponse<MovementResponseModel>>(
         [queryKey, criteria],
         () => getMovementsByCriteria(),
         // { getNextPageParam: (page: any) => (page.current_page === page.last_page ? undefined : page.current_page + 1) },
@@ -60,7 +58,7 @@ export const useMovements = (type: number, queryKey: string) => {
         return Post(`${server}/${REACT_APP_URI_MOVEMENTS}/getAllMovements`, criteria);
     };
 
-    const updateMovement = async (movement: MovementResponseModel | AddMovementFormModel) => {
+    const updateMovement = async (movement: Movement) => {
         try {
             await Post(`${server}/${REACT_APP_URI_MOVEMENTS}/update/${movement?._id}`
                 , movement
@@ -86,11 +84,12 @@ export const useMovements = (type: number, queryKey: string) => {
         getMovementsByCriteria,
         updateMovement,
         deleteMovement,
-        data,
+        response,
         refetch,
         isError,
         isSuccess,
-        isLoading
+        isLoading,
+        criteria
     }
 
 }

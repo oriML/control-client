@@ -1,7 +1,6 @@
 import { useAxiosDAL } from '../../hooks/shared/useAxiosDAL'
-import { AddMovementFormModel } from '../../models/movements/movement.model'
 import { useMutation } from 'react-query'
-import { MovementResponseModel } from '../../models/movements/movementResponse.model'
+import { Movement } from '../../models/movements/movement.DTO'
 
 import { server } from '../../utils/environment-vars'
 import { AddRecordForm } from '../add-record-form/AddRecordForm'
@@ -12,9 +11,9 @@ export function AddRecordModal(): JSX.Element {
     REACT_APP_URI_MOVEMENTS
   } = process.env;
 
-  const { mutateAsync } = useMutation((data: MovementResponseModel | AddMovementFormModel) => Post(`${server}/${REACT_APP_URI_MOVEMENTS}/addMovement`, data));
+  const { mutateAsync } = useMutation((data: Movement) => Post(`${server}/${REACT_APP_URI_MOVEMENTS}/addMovement`, data));
 
-  async function onSubmit(data: MovementResponseModel | AddMovementFormModel) {
+  async function onSubmit(data: Movement) {
     try {
       await mutateAsync(data);
     } catch (err) {

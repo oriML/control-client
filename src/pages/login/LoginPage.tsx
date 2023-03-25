@@ -1,5 +1,3 @@
-import axios from 'axios';
-import React, { FormEvent, FormEventHandler } from 'react'
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import ErrorMessage from '../../components/error-message/ErrorMessage';
@@ -8,7 +6,7 @@ import Login from '../../components/login/Login';
 import { SingleFormWrapper } from '../../components/single-form-wrapper/SingleFormWrapper';
 import { useAxiosDAL } from '../../hooks/shared/useAxiosDAL';
 import useLocalStorage from '../../hooks/shared/useLocalStorage';
-import { UserLoginModel, ILoginPageProps } from '../../models/user/UserLoginModel'
+import { IUserLogin } from '../../models/user/user.DTO'
 
 export function LoginPage() {
 
@@ -26,7 +24,7 @@ export function LoginPage() {
         REACT_APP_URI_AUTH
     } = process.env;
 
-    const { mutate, isLoading, isError, error } = useMutation((data: UserLoginModel) => Post(`${NODE_ENV === 'production' ? REACT_APP_PROD_GLOBAL_URI : REACT_APP_DEV_GLOBAL_URI}/${REACT_APP_URI_AUTH}/login`, data)
+    const { mutate, isLoading, isError, error } = useMutation((data: IUserLogin) => Post(`${NODE_ENV === 'production' ? REACT_APP_PROD_GLOBAL_URI : REACT_APP_DEV_GLOBAL_URI}/${REACT_APP_URI_AUTH}/login`, data)
         , {
             onSuccess({ data }) {
                 SetItem('jwt', data.token);
@@ -40,7 +38,7 @@ export function LoginPage() {
             },
         });
 
-    function onSubmit(model: UserLoginModel): void {
+    function onSubmit(model: IUserLogin): void {
         mutate(model);
     }
 
