@@ -1,10 +1,7 @@
-import axios from "axios"
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { AddMovementFormModel } from "../models/movements/movement.model";
-import { MovementCriteria } from "../models/movements/movementCriteria.model";
-import { MovementResponseModel } from "../models/movements/movementResponse.model";
-import { MovementType } from "../types/movementSource.type";
+import { Movement } from "../models/movements/movement.DTO";
+import { MovementCriteria } from "../models/movements/movement.DTO";
 import { server } from "../utils/environment-vars";
 import { useAxiosDAL } from "./shared/useAxiosDAL";
 
@@ -60,7 +57,7 @@ export const useMovements = (type: number, queryKey: string) => {
         return Post(`${server}/${REACT_APP_URI_MOVEMENTS}/getAllMovements`, criteria);
     };
 
-    const updateMovement = async (movement: MovementResponseModel | AddMovementFormModel) => {
+    const updateMovement = async (movement: Movement) => {
         try {
             await Post(`${server}/${REACT_APP_URI_MOVEMENTS}/update/${movement?._id}`
                 , movement

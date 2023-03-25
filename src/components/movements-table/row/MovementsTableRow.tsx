@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DeleteMovementIcon, EditMovementIcon } from '../../../icons'
-import { MovementResponseModel } from '../../../models/movements/movementResponse.model'
+import { Movement } from '../../../models/movements/movement.DTO'
 import { MovementSourceType } from '../../../types/movementSource.type'
 
 interface IMovementsTableRowProps {
-    tableRowData: MovementResponseModel
-    setSelectedMovement: (movement: MovementResponseModel) => void
+    tableRowData: Movement
+    setSelectedMovement: (movement: Movement) => void
     setToggleEditModal: (bool: boolean) => void
     setToggleDeleteModal: (bool: boolean) => void
 }
@@ -30,7 +30,7 @@ const EvenRowWrapper = ({ children }: { children: ReactNode }) => (
 
 function getFormattedDate(str: string): string {
     let d = new Date(str);
-    let ye = new Intl.DateTimeFormat('he', { year: 'numeric' }).format(d);
+    // let ye = new Intl.DateTimeFormat('he', { year: 'numeric' }).format(d);
     let mo = new Intl.DateTimeFormat('he', { month: 'short' }).format(d);
     let da = new Intl.DateTimeFormat('he', { day: '2-digit' }).format(d);
     // return `${da}/${ye}/${mo}`
@@ -66,7 +66,7 @@ function MovementsTableRow({
             </OddRowWrapper>
             <EvenRowWrapper>
                 <span>
-                    {tableRowData?.category?.name}
+                    {tableRowData?.category}
                 </span>
             </EvenRowWrapper>
             <OddRowWrapper>

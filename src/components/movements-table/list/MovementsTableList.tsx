@@ -1,10 +1,10 @@
 import React from 'react'
-import { MovementResponseModel } from '../../../models/movements/movementResponse.model'
+import { Movement } from '../../../models/movements/movement.DTO'
 import MovementsTableRow from '../row/MovementsTableRow'
 
 interface IMovementsTableListProps {
-    tableList: MovementResponseModel[]
-    setSelectedMovement: (movement: MovementResponseModel) => void
+    tableList: Movement[]
+    setSelectedMovement: (movement: Movement) => void
     setToggleEditModal: (bool: boolean) => void
     setToggleDeleteModal: (bool: boolean) => void
 }

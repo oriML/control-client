@@ -1,7 +1,8 @@
 export enum MovementSourceType {
     cash = 1,
-    bankAccount,
-    application
+    bankAccount = 2,
+    application = 3,
+    credit = 4
 }
 
 export enum MovementType {

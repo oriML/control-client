@@ -1,19 +1,13 @@
-import { MouseEventHandler, ReactNode, useState } from 'react'
-import { useInfiniteQuery, useQuery } from 'react-query'
-import { MovementCriteria } from '../../../models/movements/movementCriteria.model'
-import { MovementResponseModel } from '../../../models/movements/movementResponse.model'
+import { ReactNode, useState } from 'react'
+import { Movement, MovementCriteria } from '../../../models/movements/movement.DTO'
 import { movementsTableColumns } from '../../../utils/constants'
 import AddRecordForm from '../../add-record-form'
 import AlertModal from '../../alert-modal/AlertModal'
 import MovementsTableList from '../list/MovementsTableList'
-
 import { useTranslation } from 'react-i18next'
 import Loader from '../../loader/Loader'
 import SubmitModal from '../../submit-modal/SubmitModal'
 import { useMovements } from '../../../hooks/useMovements'
-import { MovementType } from '../../../types/movementSource.type'
-import { AddMovementFormModel } from '../../../models/movements/movement.model'
-
 interface IMovementsTableContainerProps {
     criteria: MovementCriteria
     queryKey: string
@@ -36,12 +30,9 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
     const {
         getNextMonthResults,
         getPrevMonthResults,
-        getMovementsByCriteria,
         updateMovement,
         deleteMovement,
         data,
-        refetch,
-        isError,
         isSuccess,
         isLoading
     } = useMovements(type, queryKey);
@@ -50,7 +41,7 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
 
     const [toggleDeleteModal, setToggleDeleteModal] = useState<boolean>(false);
 
-    const [selectedMovement, setSelectedMovement] = useState<MovementResponseModel | undefined>(undefined);
+    const [selectedMovement, setSelectedMovement] = useState<Movement | undefined>(undefined);
 
     const resetUI = () => {
         setSelectedMovement(undefined);
@@ -58,7 +49,7 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
         setToggleEditModal(false);
     }
 
-    const onUpdate = (model: AddMovementFormModel) => {
+    const onUpdate = (model: Movement) => {
         if (model != null) {
             updateMovement(model);
             resetUI();
@@ -68,7 +59,7 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
     }
 
     const onDelete = () => {
-        if (selectedMovement != undefined && selectedMovement?._id) {
+        if (selectedMovement !== undefined && selectedMovement?._id) {
             deleteMovement(selectedMovement._id);
             resetUI();
         } else {

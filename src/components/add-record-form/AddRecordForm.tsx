@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useQuery } from 'react-query'
-import { AddMovementFormModel } from '../../models/movements/movement.model';
+import { Movement } from '../../models/movements/movement.DTO';
 import { MovementSourceType, MovementType } from '../../types/movementSource.type';
-import { MovementResponseModel } from '../../models/movements/movementResponse.model';
-
 import { useTranslation } from 'react-i18next'
 import Autocomplete from '../autocomplete/Autocomplete';
 import { useAxiosDAL } from '../../hooks/shared/useAxiosDAL';
@@ -15,7 +13,7 @@ import { ChildrenProps } from '../add-record-modal/types';
 const initialColorsStates = -1;
 
 interface AddRecordFormProps extends ChildrenProps {
-    movement?: MovementResponseModel
+    movement?: Movement
 }
 
 export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
@@ -26,12 +24,12 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     const { Get, Post } = useAxiosDAL();
 
-    const { register, setValue, handleSubmit, resetField, watch, getValues, reset, formState: { errors } } = useForm<AddMovementFormModel>();
+    const { register, setValue, handleSubmit, resetField, reset, formState: { errors } } = useForm<Movement>();
     useEffect(() => {
         if (movement) {
             reset({
                 _id: movement?._id,
-                category: movement?.category?.name,
+                category: movement?.category,
                 price: movement?.price,
                 notes: movement?.notes,
                 type: movement?.type,
@@ -53,7 +51,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
 
     // const [autocompleteOptions, setAutocompleteOptions] = React.useState<string[]>(["test1", "test2", "test3"]);
 
-    function onSubmitForm(data: AddMovementFormModel): void {
+    function onSubmitForm(data: Movement): void {
         onSubmit(data);
         reset();
         setSelectedTypeColor(initialColorsStates);
@@ -78,7 +76,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
         resetField('category');
     }
 
-    const { data: options, isError, isSuccess, refetch, isLoading } = useQuery(
+    const { data: options } = useQuery(
         [`categoriesAC`, acSearchInput],
         () => getCategotiesByTerm(),
     )
