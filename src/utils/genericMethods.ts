@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { QueryFunctionContext, useInfiniteQuery, useMutation, useQuery, useQueryClient, UseQueryOptions } from "react-query";
 import { useAxiosDAL } from "../hooks/shared/useAxiosDAL";
-import { GetInfinitePagesInterface } from "../models";
+import { InfinitePagesInterface } from "../models";
 
 type QueryKeyT = [string, object | undefined];
 
@@ -80,9 +80,9 @@ const usePrefetch = <T>(url: string | null, params?: object) => {
 
 const useLoadMore = <T>(url: string | null, params?: object) => {
     const context = useInfiniteQuery<
-        GetInfinitePagesInterface<T>,
+        InfinitePagesInterface<T>,
         Error,
-        GetInfinitePagesInterface<T>,
+        InfinitePagesInterface<T>,
         QueryKeyT
     >(
         [url!, params],

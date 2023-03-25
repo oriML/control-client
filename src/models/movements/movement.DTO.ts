@@ -1,3 +1,5 @@
+
+import { InfinitePagesInterface } from "../";
 import { MovementSourceType } from "../../types/movementSource.type";
 
 export interface Movement {
@@ -19,6 +21,10 @@ export interface MovementCriteria {
     source?: number;
     pageNumber?: number;
     pageSize?: number;
+}
+
+export interface MovementResponseModel extends InfinitePagesInterface<Movement[]> {
+    sum: number;
 }
 
 // for future implement

@@ -59,7 +59,7 @@ export function AddRecordForm({ onSubmit, movement }: AddRecordFormProps) {
     };
 
     function onAutocompleteSelect(option: any) {
-        setValue('category', option);
+        setValue('category', option?.name);
     }
 
     const getCategotiesByTerm = async () => {

@@ -8,12 +8,13 @@ import { useTranslation } from 'react-i18next'
 import Loader from '../../loader/Loader'
 import SubmitModal from '../../submit-modal/SubmitModal'
 import { useMovements } from '../../../hooks/useMovements'
+import PageTitle from '../../page-title/PageTitle'
+import PageTab from '../../page-tab/PageTab'
 interface IMovementsTableContainerProps {
-    criteria: MovementCriteria
+    title: string,
+    icon: () => JSX.Element,
     queryKey: string
     type: number
-    setRequestCriteria: (newCriteria: MovementCriteria) => void
-
 }
 
 const ColumnHeader = ({ children }: { children?: ReactNode }) => (
@@ -24,7 +25,7 @@ const ColumnHeader = ({ children }: { children?: ReactNode }) => (
     </div>
 )
 
-export function MovementsTableContainer({ criteria, queryKey, type, setRequestCriteria }: IMovementsTableContainerProps) {
+export function MovementsTableContainer({ title, icon, queryKey, type }: IMovementsTableContainerProps) {
 
     const { t } = useTranslation();
     const {
@@ -32,9 +33,10 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
         getPrevMonthResults,
         updateMovement,
         deleteMovement,
-        data,
+        response,
         isSuccess,
-        isLoading
+        isLoading,
+        criteria
     } = useMovements(type, queryKey);
 
     const [toggleEditModal, setToggleEditModal] = useState<boolean>(false);
@@ -69,6 +71,8 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
 
     return (
         <>
+            <PageTitle title={title} icon={icon} />
+            <PageTab text={`${criteria.month}/${criteria.year}`} />
             <section className="-mx-4 px-4 sm:px-8 overflow-x-auto min-h-[470px]">
                 <div className="w-full px-4">
                     <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -91,9 +95,11 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
                                             isLoading ?
                                                 <Loader />
                                                 :
-                                                isSuccess && data?.data?.movements?.length > 0 ?
+                                                isSuccess &&
+                                                    (response?.data !== undefined) &&
+                                                    (response?.data?.data?.length > 0) ?
                                                     <MovementsTableList
-                                                        tableList={data?.data?.movements}
+                                                        tableList={response?.data?.data}
                                                         setToggleDeleteModal={setToggleDeleteModal}
                                                         setToggleEditModal={setToggleEditModal}
                                                         setSelectedMovement={setSelectedMovement}
@@ -123,7 +129,7 @@ export function MovementsTableContainer({ criteria, queryKey, type, setRequestCr
                                         <div className="mt-2 mr-auto text-sm text-indigo-50 transition duration-150  bg-green-600 font-semibold py-2 px-4 rounded absolute left-[1%]">
                                             {
                                                 <span>
-                                                    {t("SUM_TITLE", { sum: data?.data?.info?.sum ?? 0 })}
+                                                    {t("SUM_TITLE", { sum: response?.data?.sum ?? 0 })}
                                                 </span>
                                             }
                                         </div>
