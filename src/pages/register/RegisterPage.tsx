@@ -1,4 +1,3 @@
-import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next'
 import { useMutation } from 'react-query';
@@ -7,7 +6,7 @@ import ErrorMessage from '../../components/error-message/ErrorMessage';
 import { SingleFormWrapper } from '../../components/single-form-wrapper/SingleFormWrapper';
 import { useAxiosDAL } from '../../hooks/shared/useAxiosDAL';
 import useLocalStorage from '../../hooks/shared/useLocalStorage';
-import { IRegisterForm, UserRegisterModel } from '../../models/user/UserRegisterModel';
+import { IUserRegister } from '../../models/user/user.DTO';
 
 export function RegisterPage() {
     const { Post } = useAxiosDAL();
@@ -20,7 +19,7 @@ export function RegisterPage() {
         REACT_APP_URI_AUTH
     } = process.env;
 
-    const { mutate, isLoading, isError, error } = useMutation((data: UserRegisterModel) => Post(`${NODE_ENV === 'production' ? REACT_APP_PROD_GLOBAL_URI : REACT_APP_DEV_GLOBAL_URI}/${REACT_APP_URI_AUTH}/register`, data)
+    const { mutate } = useMutation((data: IUserRegister) => Post(`${NODE_ENV === 'production' ? REACT_APP_PROD_GLOBAL_URI : REACT_APP_DEV_GLOBAL_URI}/${REACT_APP_URI_AUTH}/register`, data)
         , {
             onSuccess({ data }) {
                 SetItem('jwt', data.token);
@@ -34,9 +33,9 @@ export function RegisterPage() {
         });
     const { t } = useTranslation();
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<IRegisterForm>();
+    const { register, handleSubmit, formState: { errors } } = useForm<IUserRegister>();
 
-    function onSubmitForm(data: UserRegisterModel): void {
+    function onSubmitForm(data: IUserRegister): void {
         mutate(data);
     };
 
