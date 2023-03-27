@@ -50,15 +50,14 @@ export function RegisterPage() {
                         <input
                             type="email"
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            id="exampleFormControlInput1"
-                            placeholder="אימייל"
+                            placeholder={`${t('EMAIL_PLACEHOLDER')}`}
                             {...register(
                                 "email",
                                 {
                                     required: true,
                                     pattern: {
                                         value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                        message: 'פורמט האימייל שגוי'
+                                        message: t('WRONG_FORMAT_ERR_MESSAGE')
                                     }
                                 })}
                         />
@@ -69,12 +68,15 @@ export function RegisterPage() {
                         <input
                             type="password"
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            placeholder="סיסמא"
+                            placeholder={`${t('PASSWORD_PLACEHOLDER')}`}
                             {...register("password", {
-                                required: "סיסמא היא שדה חובה",
+                                required: {
+                                    value: true,
+                                    message: t('REQUIRED_INPUT_ERR_MESSAGE')
+                                },
                                 minLength: {
                                     value: 4,
-                                    message: "הסיסמא חייבת לכלול 4 תווים לפחות"
+                                    message: t("MIN_LENGTH_ERR_MESSAGE", { "num": 4 })
                                 }
                             })}
                         />
@@ -87,10 +89,13 @@ export function RegisterPage() {
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             placeholder={`${t('NAME_PLACEHOLDER')}`}
                             {...register("name", {
-                                required: "שדה חובה",
+                                required: {
+                                    value: true,
+                                    message: t('REQUIRED_INPUT_ERR_MESSAGE')
+                                },
                                 minLength: {
                                     value: 2,
-                                    message: "שם המשתמש חייב לכלול 2 תווים לפחות"
+                                    message: t("MIN_LENGTH_ERR_MESSAGE", { "num": 2 })
                                 }
                             })}
                         />
@@ -102,15 +107,8 @@ export function RegisterPage() {
                             className="inline-block px-6 py-2.5 text-white font-medium text-s leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 w-full mb-3"
                             // data-mdb-ripple="true"
                             // data-mdb-ripple-color="light"
-                            style={{
-                                background: `linear-gradient(
-                      to right,
-                      #16A34A,
-                      #9DCFA3
-                      )`
-                            }}
-                        >
-                            התחבר
+                            style={{ background: `linear-gradient( to right, #16A34A,#9DCFA3)` }}>
+                            {t('LOGIN_TEXT')}
                         </button>
                     </div>
                 </form>

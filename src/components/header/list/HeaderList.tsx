@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import useLocalStorage from '../../../hooks/shared/useLocalStorage';
 import { LogoutIcon } from '../../../icons';
@@ -9,6 +10,9 @@ const logo = require('../../../img/money-lock.png');
 function HeaderList() {
 
     const { RemoveItem } = useLocalStorage();
+
+    const { t } = useTranslation();
+
     const history = useHistory();
 
     function Logout(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -27,7 +31,7 @@ function HeaderList() {
             </div>
             <div className="w-76 mr-2">
                 <span className="w-full font-semibold text-xl text-slate-50">
-                    קונטרול - ניהול בשליטה
+                    {t('CONTROL_MAIN_TITLE')}
                 </span>
             </div>
             <div className="py-2 pr-2">

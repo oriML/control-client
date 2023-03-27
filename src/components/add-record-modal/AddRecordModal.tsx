@@ -4,6 +4,7 @@ import { Movement } from '../../models/movements/movement.DTO'
 
 import { server } from '../../utils/environment-vars'
 import { AddRecordForm } from '../add-record-form/AddRecordForm'
+import { useTranslation } from 'react-i18next'
 
 export function AddRecordModal(): JSX.Element {
 
@@ -17,16 +18,16 @@ export function AddRecordModal(): JSX.Element {
     try {
       await mutateAsync(data);
     } catch (err) {
-      // error state = err
+      console.error(err);
     }
-
   }
+  const { t } = useTranslation();
 
   const { Post } = useAxiosDAL();
 
   return (
     <section className="w-full bg-slate-100 py-8">
-      <h1 className="text-2xl text-gray-700 font-bold mb-8 text-center">הזנת תנועה חדשה</h1>
+      <h1 className="text-2xl text-gray-700 font-bold mb-8 text-center">{t('ADD_RECORD_MODAL_TITLE')}</h1>
 
       <div className="w-4/12 mx-auto min-w-[270px]">
         <div className="border border-gray-200 bg-white rounded border-solid px-6 py-8">

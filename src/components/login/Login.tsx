@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { IUserLogin } from '../../models/user/user.DTO'
 import ErrorMessage from '../error-message/ErrorMessage'
@@ -12,6 +13,8 @@ function Login({ onSubmit, children }: ILoginProps) {
 
     const { register, handleSubmit, formState: { errors } } = useForm<IUserLogin>();
 
+    const { t } = useTranslation();
+
     function onSubmitForm(data: IUserLogin): void {
         onSubmit(data);
     };
@@ -20,21 +23,20 @@ function Login({ onSubmit, children }: ILoginProps) {
             {/* the form */}
             <form className="h-full" onSubmit={handleSubmit(onSubmitForm)}>
                 <p className="my-4 text-center">
-                    <span>כניסת משתמש</span>
+                    <span>{t('USER_LOGIN_TEXT')}</span>
                 </p>
                 <div className="mb-4">
                     <input
                         type="text"
                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id="exampleFormControlInput1"
-                        placeholder="אימייל"
+                        placeholder={`${t('EMAIL_PLACEHOLDER')}`}
                         {...register(
                             "email",
                             {
                                 required: true,
                                 pattern: {
                                     value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                    message: 'פורמט האימייל שגוי'
+                                    message: t('WRONG_FORMAT_ERR_MESSAGE')
                                 }
                             })}
                     />
@@ -45,12 +47,15 @@ function Login({ onSubmit, children }: ILoginProps) {
                     <input
                         type="password"
                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="סיסמא"
+                        placeholder={`${t('PASSWORD_PLACEHOLDER')}`}
                         {...register("password", {
-                            required: "סיסמא היא שדה חובה",
+                            required: {
+                                value: true,
+                                message: t('REQUIRED_INPUT_ERR_MESSAGE')
+                            },
                             minLength: {
                                 value: 4,
-                                message: "הסיסמא חייבת לכלול 4 תווים לפחות"
+                                message: t("MIN_LENGTH_ERR_MESSAGE", { "num": 4 })
                             }
                         })}
                     />
@@ -69,11 +74,11 @@ function Login({ onSubmit, children }: ILoginProps) {
                         )`
                         }}
                     >
-                        התחבר
+                        {t('LOGIN_TEXT')}
                     </button>
                     <div className="flex flex-col gap-2 mt-2">
-                        <a className="text-gray-500" href="#!">שכחת סיסמא?</a>
-                        <Link className="text-gray-500" to='/register'>צור משתמש חדש</Link>
+                        <a className="text-gray-500" href="#!">{t('FORGOT_PASSWORD')}</a>
+                        <Link className="text-gray-500" to='/register'>{t('REGISTER_TEXT')}</Link>
                     </div>
                 </div>
             </form>
