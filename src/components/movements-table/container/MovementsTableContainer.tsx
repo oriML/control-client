@@ -106,7 +106,7 @@ export function MovementsTableContainer({ title, icon, queryKey, type }: IMoveme
 
                                                     />
                                                     :
-                                                    <span>No data to show</span>
+                                                    <span>{t('NO_RESULTS_MESSAGE')}</span>
                                         }
                                     </div>
 
@@ -144,7 +144,7 @@ export function MovementsTableContainer({ title, icon, queryKey, type }: IMoveme
             {
                 toggleEditModal ?
                     <SubmitModal
-                        title={`ערוך תנועה`}
+                        title={`${t('EDIT_MOVEMENT_TITLE')}`}
                         text={""}
                         closeModal={() => setToggleEditModal(false)}
                         children={
@@ -163,8 +163,8 @@ export function MovementsTableContainer({ title, icon, queryKey, type }: IMoveme
             {
                 toggleDeleteModal ?
                     <AlertModal
-                        title={`מחק תנועה`}
-                        text={`אתה עומד למחוק תנועה. אתה בטוח שברצונך להמשיך?`}
+                        title={`${t('DELETE_MOVEMENT_TEXT')}`}
+                        text={`${t('DELETE_MOVEMENT_CONFIRM_TEXT')}`}
                         closeModal={() => setToggleDeleteModal(false)}
                         children={<></>}
                         onSubmit={onDelete}

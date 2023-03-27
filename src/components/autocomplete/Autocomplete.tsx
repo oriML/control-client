@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next";
 
 export default function Autocomplete({
     options,
@@ -15,6 +16,8 @@ export default function Autocomplete({
     const [showOptions, setShowOptions] = useState(false)
     const [cursor, setCursor] = useState(-1)
     const divRef = useRef<HTMLDivElement>(null);
+
+    const { t } = useTranslation();
 
     const select = (option: any) => {
         onSelect(option);
@@ -127,7 +130,7 @@ export default function Autocomplete({
                                 onClick={() => select(option)}
                             >{option.name}</li>
                         }) :
-                        <li className="px-4 py-2 text-gray-500">No results</li>
+                        <li className="px-4 py-2 text-gray-500">{t('NO_RESULTS_MESSAGE')}</li>
                 }
 
             </ul>

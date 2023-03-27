@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { AlertIcon } from '../../icons'
 import Modal from '../modal/Modal'
 
@@ -11,6 +12,8 @@ interface IModalProps {
 }
 
 function AlertModal({ onSubmit, closeModal, title, text, children }: IModalProps) {
+
+    const { t } = useTranslation();
 
     const ModalButtons = () => (
         <>
@@ -27,14 +30,14 @@ function AlertModal({ onSubmit, closeModal, title, text, children }: IModalProps
                     type="button"
                     onClick={((e) => onSubmit(e.currentTarget.value))}
                 >
-                    אישור
+                    {t('CONFIRM')}
                 </button>
                 <button
                     className="text-white bg-red-500 active:bg-red-700 background-transparent font-bold rounded uppercase px-6 py-3 text-sm outline-none focus:outline-none mr-1 mb-1"
                     type="button"
                     onClick={() => closeModal(false)}
                 >
-                    ביטול
+                    {t('CANCEL')}
                 </button>
             </div>
         </>

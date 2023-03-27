@@ -1,13 +1,17 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { CloseMenuIcon } from '../../../../icons'
 import { IMenuHeaderProps } from '../../../main.interface'
 
 function MenuHeader({ toggleMenu }: IMenuHeaderProps) {
+
+    const { t } = useTranslation();
+
     return (
         <div className="flex align-middle justify-between text-gray-100 text-xl">
             <div className="p-2.5 mt-1 flex items-center">
                 {/* <i className="bi bi-app-indicator px-2 py-1 rounded-md bg-blue-600"></i> */}
-                <h1 className="font-bold text-gray-200 text-[15px] ml-3">מערכת קונטרול</h1>
+                <h1 className="font-bold text-gray-200 text-[15px] ml-3">{t('CONTROL_SYSTEN_TITLE')}</h1>
                 <i
                     className="bi bi-x cursor-pointer ml-28 lg:hidden"
                 // onClick="openSidebar()"

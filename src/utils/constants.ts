@@ -69,3 +69,7 @@ export const apiRoutes = {
         getMovements: server + `movement/getAllMovements/`
     }
 }
+export const enum QUERY_KEYS {
+    incomes = 'incomes',
+    outcomes = 'outcomes'
+}
